@@ -1,7 +1,7 @@
 // Code generated - DO NOT EDIT.
 // This file is a generated binding and any manual changes will be lost.
 
-package pancakeswaprouterf
+package pancakeswaprouter
 
 import (
 	"errors"
@@ -28,113 +28,113 @@ var (
 	_ = event.NewSubscription
 )
 
-// PancakeswaprouterfMetaData contains all meta data concerning the Pancakeswaprouterf contract.
-var PancakeswaprouterfMetaData = &bind.MetaData{
+// PancakeswaprouterMetaData contains all meta data concerning the Pancakeswaprouter contract.
+var PancakeswaprouterMetaData = &bind.MetaData{
 	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_factory\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_WETH\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"WETH\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amountADesired\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountBDesired\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountAMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountBMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"addLiquidity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountA\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountB\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amountTokenDesired\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountTokenMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETHMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"addLiquidityETH\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountToken\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETH\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"factory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reserveIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reserveOut\",\"type\":\"uint256\"}],\"name\":\"getAmountIn\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reserveIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reserveOut\",\"type\":\"uint256\"}],\"name\":\"getAmountOut\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"}],\"name\":\"getAmountsIn\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"}],\"name\":\"getAmountsOut\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountA\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reserveA\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reserveB\",\"type\":\"uint256\"}],\"name\":\"quote\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountB\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountAMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountBMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"removeLiquidity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountA\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountB\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountTokenMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETHMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"removeLiquidityETH\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountToken\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETH\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountTokenMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETHMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"removeLiquidityETHSupportingFeeOnTransferTokens\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountETH\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountTokenMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETHMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"approveMax\",\"type\":\"bool\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"removeLiquidityETHWithPermit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountToken\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETH\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountTokenMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountETHMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"approveMax\",\"type\":\"bool\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"removeLiquidityETHWithPermitSupportingFeeOnTransferTokens\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountETH\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"liquidity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountAMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountBMin\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"approveMax\",\"type\":\"bool\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"removeLiquidityWithPermit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountA\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountB\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapETHForExactTokens\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOutMin\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapExactETHForTokens\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOutMin\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapExactETHForTokensSupportingFeeOnTransferTokens\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOutMin\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapExactTokensForETH\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOutMin\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapExactTokensForETHSupportingFeeOnTransferTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOutMin\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapExactTokensForTokens\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOutMin\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapExactTokensForTokensSupportingFeeOnTransferTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountInMax\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapTokensForExactETH\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountInMax\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"path\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swapTokensForExactTokens\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
 }
 
-// PancakeswaprouterfABI is the input ABI used to generate the binding from.
-// Deprecated: Use PancakeswaprouterfMetaData.ABI instead.
-var PancakeswaprouterfABI = PancakeswaprouterfMetaData.ABI
+// PancakeswaprouterABI is the input ABI used to generate the binding from.
+// Deprecated: Use PancakeswaprouterMetaData.ABI instead.
+var PancakeswaprouterABI = PancakeswaprouterMetaData.ABI
 
-// Pancakeswaprouterf is an auto generated Go binding around an Ethereum contract.
-type Pancakeswaprouterf struct {
-	PancakeswaprouterfCaller     // Read-only binding to the contract
-	PancakeswaprouterfTransactor // Write-only binding to the contract
-	PancakeswaprouterfFilterer   // Log filterer for contract events
+// Pancakeswaprouter is an auto generated Go binding around an Ethereum contract.
+type Pancakeswaprouter struct {
+	PancakeswaprouterCaller     // Read-only binding to the contract
+	PancakeswaprouterTransactor // Write-only binding to the contract
+	PancakeswaprouterFilterer   // Log filterer for contract events
 }
 
-// PancakeswaprouterfCaller is an auto generated read-only Go binding around an Ethereum contract.
-type PancakeswaprouterfCaller struct {
+// PancakeswaprouterCaller is an auto generated read-only Go binding around an Ethereum contract.
+type PancakeswaprouterCaller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// PancakeswaprouterfTransactor is an auto generated write-only Go binding around an Ethereum contract.
-type PancakeswaprouterfTransactor struct {
+// PancakeswaprouterTransactor is an auto generated write-only Go binding around an Ethereum contract.
+type PancakeswaprouterTransactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// PancakeswaprouterfFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
-type PancakeswaprouterfFilterer struct {
+// PancakeswaprouterFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
+type PancakeswaprouterFilterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// PancakeswaprouterfSession is an auto generated Go binding around an Ethereum contract,
+// PancakeswaprouterSession is an auto generated Go binding around an Ethereum contract,
 // with pre-set call and transact options.
-type PancakeswaprouterfSession struct {
-	Contract     *Pancakeswaprouterf // Generic contract binding to set the session for
-	CallOpts     bind.CallOpts       // Call options to use throughout this session
-	TransactOpts bind.TransactOpts   // Transaction auth options to use throughout this session
+type PancakeswaprouterSession struct {
+	Contract     *Pancakeswaprouter // Generic contract binding to set the session for
+	CallOpts     bind.CallOpts      // Call options to use throughout this session
+	TransactOpts bind.TransactOpts  // Transaction auth options to use throughout this session
 }
 
-// PancakeswaprouterfCallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// PancakeswaprouterCallerSession is an auto generated read-only Go binding around an Ethereum contract,
 // with pre-set call options.
-type PancakeswaprouterfCallerSession struct {
-	Contract *PancakeswaprouterfCaller // Generic contract caller binding to set the session for
-	CallOpts bind.CallOpts             // Call options to use throughout this session
+type PancakeswaprouterCallerSession struct {
+	Contract *PancakeswaprouterCaller // Generic contract caller binding to set the session for
+	CallOpts bind.CallOpts            // Call options to use throughout this session
 }
 
-// PancakeswaprouterfTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// PancakeswaprouterTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
 // with pre-set transact options.
-type PancakeswaprouterfTransactorSession struct {
-	Contract     *PancakeswaprouterfTransactor // Generic contract transactor binding to set the session for
-	TransactOpts bind.TransactOpts             // Transaction auth options to use throughout this session
+type PancakeswaprouterTransactorSession struct {
+	Contract     *PancakeswaprouterTransactor // Generic contract transactor binding to set the session for
+	TransactOpts bind.TransactOpts            // Transaction auth options to use throughout this session
 }
 
-// PancakeswaprouterfRaw is an auto generated low-level Go binding around an Ethereum contract.
-type PancakeswaprouterfRaw struct {
-	Contract *Pancakeswaprouterf // Generic contract binding to access the raw methods on
+// PancakeswaprouterRaw is an auto generated low-level Go binding around an Ethereum contract.
+type PancakeswaprouterRaw struct {
+	Contract *Pancakeswaprouter // Generic contract binding to access the raw methods on
 }
 
-// PancakeswaprouterfCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
-type PancakeswaprouterfCallerRaw struct {
-	Contract *PancakeswaprouterfCaller // Generic read-only contract binding to access the raw methods on
+// PancakeswaprouterCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type PancakeswaprouterCallerRaw struct {
+	Contract *PancakeswaprouterCaller // Generic read-only contract binding to access the raw methods on
 }
 
-// PancakeswaprouterfTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
-type PancakeswaprouterfTransactorRaw struct {
-	Contract *PancakeswaprouterfTransactor // Generic write-only contract binding to access the raw methods on
+// PancakeswaprouterTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type PancakeswaprouterTransactorRaw struct {
+	Contract *PancakeswaprouterTransactor // Generic write-only contract binding to access the raw methods on
 }
 
-// NewPancakeswaprouterf creates a new instance of Pancakeswaprouterf, bound to a specific deployed contract.
-func NewPancakeswaprouterf(address common.Address, backend bind.ContractBackend) (*Pancakeswaprouterf, error) {
-	contract, err := bindPancakeswaprouterf(address, backend, backend, backend)
+// NewPancakeswaprouter creates a new instance of Pancakeswaprouter, bound to a specific deployed contract.
+func NewPancakeswaprouter(address common.Address, backend bind.ContractBackend) (*Pancakeswaprouter, error) {
+	contract, err := bindPancakeswaprouter(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &Pancakeswaprouterf{PancakeswaprouterfCaller: PancakeswaprouterfCaller{contract: contract}, PancakeswaprouterfTransactor: PancakeswaprouterfTransactor{contract: contract}, PancakeswaprouterfFilterer: PancakeswaprouterfFilterer{contract: contract}}, nil
+	return &Pancakeswaprouter{PancakeswaprouterCaller: PancakeswaprouterCaller{contract: contract}, PancakeswaprouterTransactor: PancakeswaprouterTransactor{contract: contract}, PancakeswaprouterFilterer: PancakeswaprouterFilterer{contract: contract}}, nil
 }
 
-// NewPancakeswaprouterfCaller creates a new read-only instance of Pancakeswaprouterf, bound to a specific deployed contract.
-func NewPancakeswaprouterfCaller(address common.Address, caller bind.ContractCaller) (*PancakeswaprouterfCaller, error) {
-	contract, err := bindPancakeswaprouterf(address, caller, nil, nil)
+// NewPancakeswaprouterCaller creates a new read-only instance of Pancakeswaprouter, bound to a specific deployed contract.
+func NewPancakeswaprouterCaller(address common.Address, caller bind.ContractCaller) (*PancakeswaprouterCaller, error) {
+	contract, err := bindPancakeswaprouter(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &PancakeswaprouterfCaller{contract: contract}, nil
+	return &PancakeswaprouterCaller{contract: contract}, nil
 }
 
-// NewPancakeswaprouterfTransactor creates a new write-only instance of Pancakeswaprouterf, bound to a specific deployed contract.
-func NewPancakeswaprouterfTransactor(address common.Address, transactor bind.ContractTransactor) (*PancakeswaprouterfTransactor, error) {
-	contract, err := bindPancakeswaprouterf(address, nil, transactor, nil)
+// NewPancakeswaprouterTransactor creates a new write-only instance of Pancakeswaprouter, bound to a specific deployed contract.
+func NewPancakeswaprouterTransactor(address common.Address, transactor bind.ContractTransactor) (*PancakeswaprouterTransactor, error) {
+	contract, err := bindPancakeswaprouter(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &PancakeswaprouterfTransactor{contract: contract}, nil
+	return &PancakeswaprouterTransactor{contract: contract}, nil
 }
 
-// NewPancakeswaprouterfFilterer creates a new log filterer instance of Pancakeswaprouterf, bound to a specific deployed contract.
-func NewPancakeswaprouterfFilterer(address common.Address, filterer bind.ContractFilterer) (*PancakeswaprouterfFilterer, error) {
-	contract, err := bindPancakeswaprouterf(address, nil, nil, filterer)
+// NewPancakeswaprouterFilterer creates a new log filterer instance of Pancakeswaprouter, bound to a specific deployed contract.
+func NewPancakeswaprouterFilterer(address common.Address, filterer bind.ContractFilterer) (*PancakeswaprouterFilterer, error) {
+	contract, err := bindPancakeswaprouter(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &PancakeswaprouterfFilterer{contract: contract}, nil
+	return &PancakeswaprouterFilterer{contract: contract}, nil
 }
 
-// bindPancakeswaprouterf binds a generic wrapper to an already deployed contract.
-func bindPancakeswaprouterf(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(PancakeswaprouterfABI))
+// bindPancakeswaprouter binds a generic wrapper to an already deployed contract.
+func bindPancakeswaprouter(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := abi.JSON(strings.NewReader(PancakeswaprouterABI))
 	if err != nil {
 		return nil, err
 	}
@@ -145,46 +145,46 @@ func bindPancakeswaprouterf(address common.Address, caller bind.ContractCaller, 
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Pancakeswaprouterf *PancakeswaprouterfRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Pancakeswaprouterf.Contract.PancakeswaprouterfCaller.contract.Call(opts, result, method, params...)
+func (_Pancakeswaprouter *PancakeswaprouterRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Pancakeswaprouter.Contract.PancakeswaprouterCaller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Pancakeswaprouterf *PancakeswaprouterfRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.PancakeswaprouterfTransactor.contract.Transfer(opts)
+func (_Pancakeswaprouter *PancakeswaprouterRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.PancakeswaprouterTransactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Pancakeswaprouterf *PancakeswaprouterfRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.PancakeswaprouterfTransactor.contract.Transact(opts, method, params...)
+func (_Pancakeswaprouter *PancakeswaprouterRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.PancakeswaprouterTransactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Pancakeswaprouterf.Contract.contract.Call(opts, result, method, params...)
+func (_Pancakeswaprouter *PancakeswaprouterCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Pancakeswaprouter.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.contract.Transfer(opts)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.contract.Transact(opts, method, params...)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.contract.Transact(opts, method, params...)
 }
 
 // WETH is a free data retrieval call binding the contract method 0xad5c4648.
 //
 // Solidity: function WETH() view returns(address)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) WETH(opts *bind.CallOpts) (common.Address, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) WETH(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "WETH")
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "WETH")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -199,23 +199,23 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) WETH(opts *bind.CallOpts) (
 // WETH is a free data retrieval call binding the contract method 0xad5c4648.
 //
 // Solidity: function WETH() view returns(address)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) WETH() (common.Address, error) {
-	return _Pancakeswaprouterf.Contract.WETH(&_Pancakeswaprouterf.CallOpts)
+func (_Pancakeswaprouter *PancakeswaprouterSession) WETH() (common.Address, error) {
+	return _Pancakeswaprouter.Contract.WETH(&_Pancakeswaprouter.CallOpts)
 }
 
 // WETH is a free data retrieval call binding the contract method 0xad5c4648.
 //
 // Solidity: function WETH() view returns(address)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) WETH() (common.Address, error) {
-	return _Pancakeswaprouterf.Contract.WETH(&_Pancakeswaprouterf.CallOpts)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) WETH() (common.Address, error) {
+	return _Pancakeswaprouter.Contract.WETH(&_Pancakeswaprouter.CallOpts)
 }
 
 // Factory is a free data retrieval call binding the contract method 0xc45a0155.
 //
 // Solidity: function factory() view returns(address)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) Factory(opts *bind.CallOpts) (common.Address, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) Factory(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "factory")
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "factory")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -230,23 +230,23 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) Factory(opts *bind.CallOpts
 // Factory is a free data retrieval call binding the contract method 0xc45a0155.
 //
 // Solidity: function factory() view returns(address)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) Factory() (common.Address, error) {
-	return _Pancakeswaprouterf.Contract.Factory(&_Pancakeswaprouterf.CallOpts)
+func (_Pancakeswaprouter *PancakeswaprouterSession) Factory() (common.Address, error) {
+	return _Pancakeswaprouter.Contract.Factory(&_Pancakeswaprouter.CallOpts)
 }
 
 // Factory is a free data retrieval call binding the contract method 0xc45a0155.
 //
 // Solidity: function factory() view returns(address)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) Factory() (common.Address, error) {
-	return _Pancakeswaprouterf.Contract.Factory(&_Pancakeswaprouterf.CallOpts)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) Factory() (common.Address, error) {
+	return _Pancakeswaprouter.Contract.Factory(&_Pancakeswaprouter.CallOpts)
 }
 
 // GetAmountIn is a free data retrieval call binding the contract method 0x85f8c259.
 //
 // Solidity: function getAmountIn(uint256 amountOut, uint256 reserveIn, uint256 reserveOut) pure returns(uint256 amountIn)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountIn(opts *bind.CallOpts, amountOut *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) GetAmountIn(opts *bind.CallOpts, amountOut *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "getAmountIn", amountOut, reserveIn, reserveOut)
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "getAmountIn", amountOut, reserveIn, reserveOut)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -261,23 +261,23 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountIn(opts *bind.Call
 // GetAmountIn is a free data retrieval call binding the contract method 0x85f8c259.
 //
 // Solidity: function getAmountIn(uint256 amountOut, uint256 reserveIn, uint256 reserveOut) pure returns(uint256 amountIn)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) GetAmountIn(amountOut *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountIn(&_Pancakeswaprouterf.CallOpts, amountOut, reserveIn, reserveOut)
+func (_Pancakeswaprouter *PancakeswaprouterSession) GetAmountIn(amountOut *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountIn(&_Pancakeswaprouter.CallOpts, amountOut, reserveIn, reserveOut)
 }
 
 // GetAmountIn is a free data retrieval call binding the contract method 0x85f8c259.
 //
 // Solidity: function getAmountIn(uint256 amountOut, uint256 reserveIn, uint256 reserveOut) pure returns(uint256 amountIn)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) GetAmountIn(amountOut *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountIn(&_Pancakeswaprouterf.CallOpts, amountOut, reserveIn, reserveOut)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) GetAmountIn(amountOut *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountIn(&_Pancakeswaprouter.CallOpts, amountOut, reserveIn, reserveOut)
 }
 
 // GetAmountOut is a free data retrieval call binding the contract method 0x054d50d4.
 //
 // Solidity: function getAmountOut(uint256 amountIn, uint256 reserveIn, uint256 reserveOut) pure returns(uint256 amountOut)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountOut(opts *bind.CallOpts, amountIn *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) GetAmountOut(opts *bind.CallOpts, amountIn *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "getAmountOut", amountIn, reserveIn, reserveOut)
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "getAmountOut", amountIn, reserveIn, reserveOut)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -292,23 +292,23 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountOut(opts *bind.Cal
 // GetAmountOut is a free data retrieval call binding the contract method 0x054d50d4.
 //
 // Solidity: function getAmountOut(uint256 amountIn, uint256 reserveIn, uint256 reserveOut) pure returns(uint256 amountOut)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) GetAmountOut(amountIn *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountOut(&_Pancakeswaprouterf.CallOpts, amountIn, reserveIn, reserveOut)
+func (_Pancakeswaprouter *PancakeswaprouterSession) GetAmountOut(amountIn *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountOut(&_Pancakeswaprouter.CallOpts, amountIn, reserveIn, reserveOut)
 }
 
 // GetAmountOut is a free data retrieval call binding the contract method 0x054d50d4.
 //
 // Solidity: function getAmountOut(uint256 amountIn, uint256 reserveIn, uint256 reserveOut) pure returns(uint256 amountOut)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) GetAmountOut(amountIn *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountOut(&_Pancakeswaprouterf.CallOpts, amountIn, reserveIn, reserveOut)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) GetAmountOut(amountIn *big.Int, reserveIn *big.Int, reserveOut *big.Int) (*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountOut(&_Pancakeswaprouter.CallOpts, amountIn, reserveIn, reserveOut)
 }
 
 // GetAmountsIn is a free data retrieval call binding the contract method 0x1f00ca74.
 //
 // Solidity: function getAmountsIn(uint256 amountOut, address[] path) view returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountsIn(opts *bind.CallOpts, amountOut *big.Int, path []common.Address) ([]*big.Int, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) GetAmountsIn(opts *bind.CallOpts, amountOut *big.Int, path []common.Address) ([]*big.Int, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "getAmountsIn", amountOut, path)
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "getAmountsIn", amountOut, path)
 
 	if err != nil {
 		return *new([]*big.Int), err
@@ -323,23 +323,23 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountsIn(opts *bind.Cal
 // GetAmountsIn is a free data retrieval call binding the contract method 0x1f00ca74.
 //
 // Solidity: function getAmountsIn(uint256 amountOut, address[] path) view returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) GetAmountsIn(amountOut *big.Int, path []common.Address) ([]*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountsIn(&_Pancakeswaprouterf.CallOpts, amountOut, path)
+func (_Pancakeswaprouter *PancakeswaprouterSession) GetAmountsIn(amountOut *big.Int, path []common.Address) ([]*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountsIn(&_Pancakeswaprouter.CallOpts, amountOut, path)
 }
 
 // GetAmountsIn is a free data retrieval call binding the contract method 0x1f00ca74.
 //
 // Solidity: function getAmountsIn(uint256 amountOut, address[] path) view returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) GetAmountsIn(amountOut *big.Int, path []common.Address) ([]*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountsIn(&_Pancakeswaprouterf.CallOpts, amountOut, path)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) GetAmountsIn(amountOut *big.Int, path []common.Address) ([]*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountsIn(&_Pancakeswaprouter.CallOpts, amountOut, path)
 }
 
 // GetAmountsOut is a free data retrieval call binding the contract method 0xd06ca61f.
 //
 // Solidity: function getAmountsOut(uint256 amountIn, address[] path) view returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountsOut(opts *bind.CallOpts, amountIn *big.Int, path []common.Address) ([]*big.Int, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) GetAmountsOut(opts *bind.CallOpts, amountIn *big.Int, path []common.Address) ([]*big.Int, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "getAmountsOut", amountIn, path)
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "getAmountsOut", amountIn, path)
 
 	if err != nil {
 		return *new([]*big.Int), err
@@ -354,23 +354,23 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) GetAmountsOut(opts *bind.Ca
 // GetAmountsOut is a free data retrieval call binding the contract method 0xd06ca61f.
 //
 // Solidity: function getAmountsOut(uint256 amountIn, address[] path) view returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) GetAmountsOut(amountIn *big.Int, path []common.Address) ([]*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountsOut(&_Pancakeswaprouterf.CallOpts, amountIn, path)
+func (_Pancakeswaprouter *PancakeswaprouterSession) GetAmountsOut(amountIn *big.Int, path []common.Address) ([]*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountsOut(&_Pancakeswaprouter.CallOpts, amountIn, path)
 }
 
 // GetAmountsOut is a free data retrieval call binding the contract method 0xd06ca61f.
 //
 // Solidity: function getAmountsOut(uint256 amountIn, address[] path) view returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) GetAmountsOut(amountIn *big.Int, path []common.Address) ([]*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.GetAmountsOut(&_Pancakeswaprouterf.CallOpts, amountIn, path)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) GetAmountsOut(amountIn *big.Int, path []common.Address) ([]*big.Int, error) {
+	return _Pancakeswaprouter.Contract.GetAmountsOut(&_Pancakeswaprouter.CallOpts, amountIn, path)
 }
 
 // Quote is a free data retrieval call binding the contract method 0xad615dec.
 //
 // Solidity: function quote(uint256 amountA, uint256 reserveA, uint256 reserveB) pure returns(uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfCaller) Quote(opts *bind.CallOpts, amountA *big.Int, reserveA *big.Int, reserveB *big.Int) (*big.Int, error) {
+func (_Pancakeswaprouter *PancakeswaprouterCaller) Quote(opts *bind.CallOpts, amountA *big.Int, reserveA *big.Int, reserveB *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Pancakeswaprouterf.contract.Call(opts, &out, "quote", amountA, reserveA, reserveB)
+	err := _Pancakeswaprouter.contract.Call(opts, &out, "quote", amountA, reserveA, reserveB)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -385,391 +385,391 @@ func (_Pancakeswaprouterf *PancakeswaprouterfCaller) Quote(opts *bind.CallOpts, 
 // Quote is a free data retrieval call binding the contract method 0xad615dec.
 //
 // Solidity: function quote(uint256 amountA, uint256 reserveA, uint256 reserveB) pure returns(uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) Quote(amountA *big.Int, reserveA *big.Int, reserveB *big.Int) (*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.Quote(&_Pancakeswaprouterf.CallOpts, amountA, reserveA, reserveB)
+func (_Pancakeswaprouter *PancakeswaprouterSession) Quote(amountA *big.Int, reserveA *big.Int, reserveB *big.Int) (*big.Int, error) {
+	return _Pancakeswaprouter.Contract.Quote(&_Pancakeswaprouter.CallOpts, amountA, reserveA, reserveB)
 }
 
 // Quote is a free data retrieval call binding the contract method 0xad615dec.
 //
 // Solidity: function quote(uint256 amountA, uint256 reserveA, uint256 reserveB) pure returns(uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfCallerSession) Quote(amountA *big.Int, reserveA *big.Int, reserveB *big.Int) (*big.Int, error) {
-	return _Pancakeswaprouterf.Contract.Quote(&_Pancakeswaprouterf.CallOpts, amountA, reserveA, reserveB)
+func (_Pancakeswaprouter *PancakeswaprouterCallerSession) Quote(amountA *big.Int, reserveA *big.Int, reserveB *big.Int) (*big.Int, error) {
+	return _Pancakeswaprouter.Contract.Quote(&_Pancakeswaprouter.CallOpts, amountA, reserveA, reserveB)
 }
 
 // AddLiquidity is a paid mutator transaction binding the contract method 0xe8e33700.
 //
 // Solidity: function addLiquidity(address tokenA, address tokenB, uint256 amountADesired, uint256 amountBDesired, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline) returns(uint256 amountA, uint256 amountB, uint256 liquidity)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) AddLiquidity(opts *bind.TransactOpts, tokenA common.Address, tokenB common.Address, amountADesired *big.Int, amountBDesired *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "addLiquidity", tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) AddLiquidity(opts *bind.TransactOpts, tokenA common.Address, tokenB common.Address, amountADesired *big.Int, amountBDesired *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "addLiquidity", tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, to, deadline)
 }
 
 // AddLiquidity is a paid mutator transaction binding the contract method 0xe8e33700.
 //
 // Solidity: function addLiquidity(address tokenA, address tokenB, uint256 amountADesired, uint256 amountBDesired, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline) returns(uint256 amountA, uint256 amountB, uint256 liquidity)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) AddLiquidity(tokenA common.Address, tokenB common.Address, amountADesired *big.Int, amountBDesired *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.AddLiquidity(&_Pancakeswaprouterf.TransactOpts, tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) AddLiquidity(tokenA common.Address, tokenB common.Address, amountADesired *big.Int, amountBDesired *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.AddLiquidity(&_Pancakeswaprouter.TransactOpts, tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, to, deadline)
 }
 
 // AddLiquidity is a paid mutator transaction binding the contract method 0xe8e33700.
 //
 // Solidity: function addLiquidity(address tokenA, address tokenB, uint256 amountADesired, uint256 amountBDesired, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline) returns(uint256 amountA, uint256 amountB, uint256 liquidity)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) AddLiquidity(tokenA common.Address, tokenB common.Address, amountADesired *big.Int, amountBDesired *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.AddLiquidity(&_Pancakeswaprouterf.TransactOpts, tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) AddLiquidity(tokenA common.Address, tokenB common.Address, amountADesired *big.Int, amountBDesired *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.AddLiquidity(&_Pancakeswaprouter.TransactOpts, tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, to, deadline)
 }
 
 // AddLiquidityETH is a paid mutator transaction binding the contract method 0xf305d719.
 //
 // Solidity: function addLiquidityETH(address token, uint256 amountTokenDesired, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) payable returns(uint256 amountToken, uint256 amountETH, uint256 liquidity)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) AddLiquidityETH(opts *bind.TransactOpts, token common.Address, amountTokenDesired *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "addLiquidityETH", token, amountTokenDesired, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) AddLiquidityETH(opts *bind.TransactOpts, token common.Address, amountTokenDesired *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "addLiquidityETH", token, amountTokenDesired, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // AddLiquidityETH is a paid mutator transaction binding the contract method 0xf305d719.
 //
 // Solidity: function addLiquidityETH(address token, uint256 amountTokenDesired, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) payable returns(uint256 amountToken, uint256 amountETH, uint256 liquidity)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) AddLiquidityETH(token common.Address, amountTokenDesired *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.AddLiquidityETH(&_Pancakeswaprouterf.TransactOpts, token, amountTokenDesired, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) AddLiquidityETH(token common.Address, amountTokenDesired *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.AddLiquidityETH(&_Pancakeswaprouter.TransactOpts, token, amountTokenDesired, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // AddLiquidityETH is a paid mutator transaction binding the contract method 0xf305d719.
 //
 // Solidity: function addLiquidityETH(address token, uint256 amountTokenDesired, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) payable returns(uint256 amountToken, uint256 amountETH, uint256 liquidity)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) AddLiquidityETH(token common.Address, amountTokenDesired *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.AddLiquidityETH(&_Pancakeswaprouterf.TransactOpts, token, amountTokenDesired, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) AddLiquidityETH(token common.Address, amountTokenDesired *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.AddLiquidityETH(&_Pancakeswaprouter.TransactOpts, token, amountTokenDesired, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidity is a paid mutator transaction binding the contract method 0xbaa2abde.
 //
 // Solidity: function removeLiquidity(address tokenA, address tokenB, uint256 liquidity, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline) returns(uint256 amountA, uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) RemoveLiquidity(opts *bind.TransactOpts, tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "removeLiquidity", tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) RemoveLiquidity(opts *bind.TransactOpts, tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "removeLiquidity", tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline)
 }
 
 // RemoveLiquidity is a paid mutator transaction binding the contract method 0xbaa2abde.
 //
 // Solidity: function removeLiquidity(address tokenA, address tokenB, uint256 liquidity, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline) returns(uint256 amountA, uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) RemoveLiquidity(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidity(&_Pancakeswaprouterf.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) RemoveLiquidity(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidity(&_Pancakeswaprouter.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline)
 }
 
 // RemoveLiquidity is a paid mutator transaction binding the contract method 0xbaa2abde.
 //
 // Solidity: function removeLiquidity(address tokenA, address tokenB, uint256 liquidity, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline) returns(uint256 amountA, uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) RemoveLiquidity(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidity(&_Pancakeswaprouterf.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) RemoveLiquidity(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidity(&_Pancakeswaprouter.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline)
 }
 
 // RemoveLiquidityETH is a paid mutator transaction binding the contract method 0x02751cec.
 //
 // Solidity: function removeLiquidityETH(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) returns(uint256 amountToken, uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) RemoveLiquidityETH(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "removeLiquidityETH", token, liquidity, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) RemoveLiquidityETH(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "removeLiquidityETH", token, liquidity, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidityETH is a paid mutator transaction binding the contract method 0x02751cec.
 //
 // Solidity: function removeLiquidityETH(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) returns(uint256 amountToken, uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) RemoveLiquidityETH(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETH(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) RemoveLiquidityETH(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETH(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidityETH is a paid mutator transaction binding the contract method 0x02751cec.
 //
 // Solidity: function removeLiquidityETH(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) returns(uint256 amountToken, uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) RemoveLiquidityETH(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETH(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) RemoveLiquidityETH(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETH(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidityETHSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0xaf2979eb.
 //
 // Solidity: function removeLiquidityETHSupportingFeeOnTransferTokens(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) returns(uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) RemoveLiquidityETHSupportingFeeOnTransferTokens(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "removeLiquidityETHSupportingFeeOnTransferTokens", token, liquidity, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) RemoveLiquidityETHSupportingFeeOnTransferTokens(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "removeLiquidityETHSupportingFeeOnTransferTokens", token, liquidity, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidityETHSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0xaf2979eb.
 //
 // Solidity: function removeLiquidityETHSupportingFeeOnTransferTokens(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) returns(uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) RemoveLiquidityETHSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETHSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) RemoveLiquidityETHSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETHSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidityETHSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0xaf2979eb.
 //
 // Solidity: function removeLiquidityETHSupportingFeeOnTransferTokens(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline) returns(uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) RemoveLiquidityETHSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETHSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) RemoveLiquidityETHSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETHSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline)
 }
 
 // RemoveLiquidityETHWithPermit is a paid mutator transaction binding the contract method 0xded9382a.
 //
 // Solidity: function removeLiquidityETHWithPermit(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountToken, uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) RemoveLiquidityETHWithPermit(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "removeLiquidityETHWithPermit", token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) RemoveLiquidityETHWithPermit(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "removeLiquidityETHWithPermit", token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityETHWithPermit is a paid mutator transaction binding the contract method 0xded9382a.
 //
 // Solidity: function removeLiquidityETHWithPermit(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountToken, uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) RemoveLiquidityETHWithPermit(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETHWithPermit(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterSession) RemoveLiquidityETHWithPermit(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETHWithPermit(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityETHWithPermit is a paid mutator transaction binding the contract method 0xded9382a.
 //
 // Solidity: function removeLiquidityETHWithPermit(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountToken, uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) RemoveLiquidityETHWithPermit(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETHWithPermit(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) RemoveLiquidityETHWithPermit(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETHWithPermit(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x5b0d5984.
 //
 // Solidity: function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens", token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(opts *bind.TransactOpts, token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens", token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x5b0d5984.
 //
 // Solidity: function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterSession) RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x5b0d5984.
 //
 // Solidity: function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address token, uint256 liquidity, uint256 amountTokenMin, uint256 amountETHMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountETH)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(token common.Address, liquidity *big.Int, amountTokenMin *big.Int, amountETHMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityETHWithPermitSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, token, liquidity, amountTokenMin, amountETHMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityWithPermit is a paid mutator transaction binding the contract method 0x2195995c.
 //
 // Solidity: function removeLiquidityWithPermit(address tokenA, address tokenB, uint256 liquidity, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountA, uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) RemoveLiquidityWithPermit(opts *bind.TransactOpts, tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "removeLiquidityWithPermit", tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) RemoveLiquidityWithPermit(opts *bind.TransactOpts, tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "removeLiquidityWithPermit", tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityWithPermit is a paid mutator transaction binding the contract method 0x2195995c.
 //
 // Solidity: function removeLiquidityWithPermit(address tokenA, address tokenB, uint256 liquidity, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountA, uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) RemoveLiquidityWithPermit(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityWithPermit(&_Pancakeswaprouterf.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterSession) RemoveLiquidityWithPermit(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityWithPermit(&_Pancakeswaprouter.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, approveMax, v, r, s)
 }
 
 // RemoveLiquidityWithPermit is a paid mutator transaction binding the contract method 0x2195995c.
 //
 // Solidity: function removeLiquidityWithPermit(address tokenA, address tokenB, uint256 liquidity, uint256 amountAMin, uint256 amountBMin, address to, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) returns(uint256 amountA, uint256 amountB)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) RemoveLiquidityWithPermit(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.RemoveLiquidityWithPermit(&_Pancakeswaprouterf.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, approveMax, v, r, s)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) RemoveLiquidityWithPermit(tokenA common.Address, tokenB common.Address, liquidity *big.Int, amountAMin *big.Int, amountBMin *big.Int, to common.Address, deadline *big.Int, approveMax bool, v uint8, r [32]byte, s [32]byte) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.RemoveLiquidityWithPermit(&_Pancakeswaprouter.TransactOpts, tokenA, tokenB, liquidity, amountAMin, amountBMin, to, deadline, approveMax, v, r, s)
 }
 
 // SwapETHForExactTokens is a paid mutator transaction binding the contract method 0xfb3bdb41.
 //
 // Solidity: function swapETHForExactTokens(uint256 amountOut, address[] path, address to, uint256 deadline) payable returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapETHForExactTokens(opts *bind.TransactOpts, amountOut *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapETHForExactTokens", amountOut, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapETHForExactTokens(opts *bind.TransactOpts, amountOut *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapETHForExactTokens", amountOut, path, to, deadline)
 }
 
 // SwapETHForExactTokens is a paid mutator transaction binding the contract method 0xfb3bdb41.
 //
 // Solidity: function swapETHForExactTokens(uint256 amountOut, address[] path, address to, uint256 deadline) payable returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapETHForExactTokens(amountOut *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapETHForExactTokens(&_Pancakeswaprouterf.TransactOpts, amountOut, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapETHForExactTokens(amountOut *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapETHForExactTokens(&_Pancakeswaprouter.TransactOpts, amountOut, path, to, deadline)
 }
 
 // SwapETHForExactTokens is a paid mutator transaction binding the contract method 0xfb3bdb41.
 //
 // Solidity: function swapETHForExactTokens(uint256 amountOut, address[] path, address to, uint256 deadline) payable returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapETHForExactTokens(amountOut *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapETHForExactTokens(&_Pancakeswaprouterf.TransactOpts, amountOut, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapETHForExactTokens(amountOut *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapETHForExactTokens(&_Pancakeswaprouter.TransactOpts, amountOut, path, to, deadline)
 }
 
 // SwapExactETHForTokens is a paid mutator transaction binding the contract method 0x7ff36ab5.
 //
 // Solidity: function swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline) payable returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapExactETHForTokens(opts *bind.TransactOpts, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapExactETHForTokens", amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapExactETHForTokens(opts *bind.TransactOpts, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapExactETHForTokens", amountOutMin, path, to, deadline)
 }
 
 // SwapExactETHForTokens is a paid mutator transaction binding the contract method 0x7ff36ab5.
 //
 // Solidity: function swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline) payable returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapExactETHForTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactETHForTokens(&_Pancakeswaprouterf.TransactOpts, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapExactETHForTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactETHForTokens(&_Pancakeswaprouter.TransactOpts, amountOutMin, path, to, deadline)
 }
 
 // SwapExactETHForTokens is a paid mutator transaction binding the contract method 0x7ff36ab5.
 //
 // Solidity: function swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline) payable returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapExactETHForTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactETHForTokens(&_Pancakeswaprouterf.TransactOpts, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapExactETHForTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactETHForTokens(&_Pancakeswaprouter.TransactOpts, amountOutMin, path, to, deadline)
 }
 
 // SwapExactETHForTokensSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0xb6f9de95.
 //
 // Solidity: function swapExactETHForTokensSupportingFeeOnTransferTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline) payable returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapExactETHForTokensSupportingFeeOnTransferTokens(opts *bind.TransactOpts, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapExactETHForTokensSupportingFeeOnTransferTokens", amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapExactETHForTokensSupportingFeeOnTransferTokens(opts *bind.TransactOpts, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapExactETHForTokensSupportingFeeOnTransferTokens", amountOutMin, path, to, deadline)
 }
 
 // SwapExactETHForTokensSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0xb6f9de95.
 //
 // Solidity: function swapExactETHForTokensSupportingFeeOnTransferTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline) payable returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapExactETHForTokensSupportingFeeOnTransferTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactETHForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapExactETHForTokensSupportingFeeOnTransferTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactETHForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, amountOutMin, path, to, deadline)
 }
 
 // SwapExactETHForTokensSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0xb6f9de95.
 //
 // Solidity: function swapExactETHForTokensSupportingFeeOnTransferTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline) payable returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapExactETHForTokensSupportingFeeOnTransferTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactETHForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapExactETHForTokensSupportingFeeOnTransferTokens(amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactETHForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForETH is a paid mutator transaction binding the contract method 0x18cbafe5.
 //
 // Solidity: function swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapExactTokensForETH(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapExactTokensForETH", amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapExactTokensForETH(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapExactTokensForETH", amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForETH is a paid mutator transaction binding the contract method 0x18cbafe5.
 //
 // Solidity: function swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapExactTokensForETH(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForETH(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapExactTokensForETH(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForETH(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForETH is a paid mutator transaction binding the contract method 0x18cbafe5.
 //
 // Solidity: function swapExactTokensForETH(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapExactTokensForETH(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForETH(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapExactTokensForETH(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForETH(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForETHSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x791ac947.
 //
 // Solidity: function swapExactTokensForETHSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapExactTokensForETHSupportingFeeOnTransferTokens(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapExactTokensForETHSupportingFeeOnTransferTokens", amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapExactTokensForETHSupportingFeeOnTransferTokens(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapExactTokensForETHSupportingFeeOnTransferTokens", amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForETHSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x791ac947.
 //
 // Solidity: function swapExactTokensForETHSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapExactTokensForETHSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForETHSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapExactTokensForETHSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForETHSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForETHSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x791ac947.
 //
 // Solidity: function swapExactTokensForETHSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapExactTokensForETHSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForETHSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapExactTokensForETHSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForETHSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForTokens is a paid mutator transaction binding the contract method 0x38ed1739.
 //
 // Solidity: function swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapExactTokensForTokens(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapExactTokensForTokens", amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapExactTokensForTokens(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapExactTokensForTokens", amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForTokens is a paid mutator transaction binding the contract method 0x38ed1739.
 //
 // Solidity: function swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapExactTokensForTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForTokens(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapExactTokensForTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForTokens(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForTokens is a paid mutator transaction binding the contract method 0x38ed1739.
 //
 // Solidity: function swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapExactTokensForTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForTokens(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapExactTokensForTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForTokens(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForTokensSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x5c11d795.
 //
 // Solidity: function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapExactTokensForTokensSupportingFeeOnTransferTokens(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapExactTokensForTokensSupportingFeeOnTransferTokens", amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapExactTokensForTokensSupportingFeeOnTransferTokens(opts *bind.TransactOpts, amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapExactTokensForTokensSupportingFeeOnTransferTokens", amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForTokensSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x5c11d795.
 //
 // Solidity: function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapExactTokensForTokensSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapExactTokensForTokensSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapExactTokensForTokensSupportingFeeOnTransferTokens is a paid mutator transaction binding the contract method 0x5c11d795.
 //
 // Solidity: function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256 amountIn, uint256 amountOutMin, address[] path, address to, uint256 deadline) returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapExactTokensForTokensSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapExactTokensForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouterf.TransactOpts, amountIn, amountOutMin, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapExactTokensForTokensSupportingFeeOnTransferTokens(amountIn *big.Int, amountOutMin *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapExactTokensForTokensSupportingFeeOnTransferTokens(&_Pancakeswaprouter.TransactOpts, amountIn, amountOutMin, path, to, deadline)
 }
 
 // SwapTokensForExactETH is a paid mutator transaction binding the contract method 0x4a25d94a.
 //
 // Solidity: function swapTokensForExactETH(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapTokensForExactETH(opts *bind.TransactOpts, amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapTokensForExactETH", amountOut, amountInMax, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapTokensForExactETH(opts *bind.TransactOpts, amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapTokensForExactETH", amountOut, amountInMax, path, to, deadline)
 }
 
 // SwapTokensForExactETH is a paid mutator transaction binding the contract method 0x4a25d94a.
 //
 // Solidity: function swapTokensForExactETH(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapTokensForExactETH(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapTokensForExactETH(&_Pancakeswaprouterf.TransactOpts, amountOut, amountInMax, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapTokensForExactETH(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapTokensForExactETH(&_Pancakeswaprouter.TransactOpts, amountOut, amountInMax, path, to, deadline)
 }
 
 // SwapTokensForExactETH is a paid mutator transaction binding the contract method 0x4a25d94a.
 //
 // Solidity: function swapTokensForExactETH(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapTokensForExactETH(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapTokensForExactETH(&_Pancakeswaprouterf.TransactOpts, amountOut, amountInMax, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapTokensForExactETH(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapTokensForExactETH(&_Pancakeswaprouter.TransactOpts, amountOut, amountInMax, path, to, deadline)
 }
 
 // SwapTokensForExactTokens is a paid mutator transaction binding the contract method 0x8803dbee.
 //
 // Solidity: function swapTokensForExactTokens(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) SwapTokensForExactTokens(opts *bind.TransactOpts, amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.Transact(opts, "swapTokensForExactTokens", amountOut, amountInMax, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) SwapTokensForExactTokens(opts *bind.TransactOpts, amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.Transact(opts, "swapTokensForExactTokens", amountOut, amountInMax, path, to, deadline)
 }
 
 // SwapTokensForExactTokens is a paid mutator transaction binding the contract method 0x8803dbee.
 //
 // Solidity: function swapTokensForExactTokens(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) SwapTokensForExactTokens(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapTokensForExactTokens(&_Pancakeswaprouterf.TransactOpts, amountOut, amountInMax, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterSession) SwapTokensForExactTokens(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapTokensForExactTokens(&_Pancakeswaprouter.TransactOpts, amountOut, amountInMax, path, to, deadline)
 }
 
 // SwapTokensForExactTokens is a paid mutator transaction binding the contract method 0x8803dbee.
 //
 // Solidity: function swapTokensForExactTokens(uint256 amountOut, uint256 amountInMax, address[] path, address to, uint256 deadline) returns(uint256[] amounts)
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) SwapTokensForExactTokens(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.SwapTokensForExactTokens(&_Pancakeswaprouterf.TransactOpts, amountOut, amountInMax, path, to, deadline)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) SwapTokensForExactTokens(amountOut *big.Int, amountInMax *big.Int, path []common.Address, to common.Address, deadline *big.Int) (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.SwapTokensForExactTokens(&_Pancakeswaprouter.TransactOpts, amountOut, amountInMax, path, to, deadline)
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
 //
 // Solidity: receive() payable returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactor) Receive(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pancakeswaprouterf.contract.RawTransact(opts, nil) // calldata is disallowed for receive function
+func (_Pancakeswaprouter *PancakeswaprouterTransactor) Receive(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Pancakeswaprouter.contract.RawTransact(opts, nil) // calldata is disallowed for receive function
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
 //
 // Solidity: receive() payable returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfSession) Receive() (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.Receive(&_Pancakeswaprouterf.TransactOpts)
+func (_Pancakeswaprouter *PancakeswaprouterSession) Receive() (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.Receive(&_Pancakeswaprouter.TransactOpts)
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
 //
 // Solidity: receive() payable returns()
-func (_Pancakeswaprouterf *PancakeswaprouterfTransactorSession) Receive() (*types.Transaction, error) {
-	return _Pancakeswaprouterf.Contract.Receive(&_Pancakeswaprouterf.TransactOpts)
+func (_Pancakeswaprouter *PancakeswaprouterTransactorSession) Receive() (*types.Transaction, error) {
+	return _Pancakeswaprouter.Contract.Receive(&_Pancakeswaprouter.TransactOpts)
 }
