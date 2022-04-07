@@ -5,7 +5,6 @@ go 1.17
 require github.com/ethereum/go-ethereum v1.10.17
 
 require (
-	github.com/766b/go-outliner v0.0.0-20180511142203-fc6edecdadd7 // indirect
 	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.1.3 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
