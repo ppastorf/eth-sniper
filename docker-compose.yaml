@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  geth:
+    image: ethereum/client-go:stable
+    restart: "no"
+    # environment:\
+    # command: --config /root/geth.toml --syncmode snap
+    ports:
+      - 30303:30303
+      - 8545:845
+    expose:
+      - 8546
+      - 8547
+    volumes:
+      - ./.volume/ethereum:/root/.ethereum
+      - ./config/geth.toml:/root/geth.toml
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 2s
+      timeout: 20s
+      retries: 30
+
+volumes:
+  kafka:
+    driver: local
