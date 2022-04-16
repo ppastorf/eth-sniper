@@ -8,9 +8,20 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
+type Node struct {
+	Proto    string
+	Username string
+	Password string
+	Address  string
+}
+
+func (n *Node) ConnectAddress() string {
+	return fmt.Sprintf("%s://%s:%s@%s", n.Proto, n.Username, n.Password, n.Address)
+}
+
 type Network struct {
 	ConnectAddress string
-	Currency       *Token
+	EthCurrency    *Token
 	chainID        *big.Int
 	connected      bool
 }

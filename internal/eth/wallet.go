@@ -41,7 +41,7 @@ func NewWallet(privKey string) (*Wallet, error) {
 	return w, nil
 }
 
-func (w *Wallet) GetBalance(client *ethclient.Client, ctx context.Context, unit float64) (*big.Float, error) {
+func (w *Wallet) GetEthBalance(client *ethclient.Client, ctx context.Context, unit float64) (*big.Float, error) {
 	balanceWei, err := client.BalanceAt(ctx, w.Address(), nil)
 	if err != nil {
 		return nil, err

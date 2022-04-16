@@ -9,8 +9,8 @@ import (
 )
 
 type Token struct {
+	Name    string
 	Address common.Address
-	Repr    string
 }
 
 func FromWei(wei *big.Int, unit float64) *big.Float {
