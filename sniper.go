@@ -13,25 +13,23 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"strings"
+	"math/big"
 
 	pancake "sniper/contracts/bsc/pancakeswap"
 	eth "sniper/internal/eth"
+	"sniper/internal/swap"
 
 	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/params"
 )
 
-type Contract struct {
-	Address common.Address
-	ABI     abi.ABI
-}
-
-func listenForPairCreated(client *ethclient.Client, ctx context.Context, factory Contract, targetToken common.Address) {
+func listenForPairCreated(client *ethclient.Client, ctx context.Context, factory *eth.Contract, targetToken common.Address) {
+	targetTokenHash := targetToken.Hash()
 	eventSignature := crypto.Keccak256Hash([]byte("PairCreated(address,address,address,uint256)"))
 	querySpec := eth.EventQuerySpec{
 		Name:        "PairCreated",
@@ -46,46 +44,83 @@ func listenForPairCreated(client *ethclient.Client, ctx context.Context, factory
 	go eth.ListenForEvents(client, ctx, querySpec, pairsCreated)
 
 	for pair := range pairsCreated {
-		tokenA := pair.Topics[1].Hex()
-		tokenB := pair.Topics[2].Hex()
+		tokenA := pair.Topics[1]
+		tokenB := pair.Topics[2]
 
-		fmt.Printf("PairCreated: %s\n", pair.ParsedData[0])
-		fmt.Printf("TokenA: %s\n", common.HexToAddress(tokenA))
-		fmt.Printf("TokenB: %s\n", common.HexToAddress(tokenB))
-
-		if (common.HexToAddress(tokenA) == targetToken) ||
-			(common.HexToAddress(tokenB) == targetToken) {
+		if (tokenA == targetTokenHash) || (tokenB == targetTokenHash) {
 			// buy trigger
-			fmt.Printf("Its the target pair!")
+			fmt.Printf("PairCreated: %s\n", pair.ParsedData[0])
+			fmt.Printf("TokenA: %s\n", tokenA.Hex())
+			fmt.Printf("TokenB: %s\n", tokenA.Hex())
 			return
 		}
 	}
 }
 
+func sendTxAsync(client *ethclient.Client, ctx context.Context, tx *types.Transaction, sent chan<- common.Hash, mined chan<- *types.Receipt) {
+	var err error
+
+	err = client.SendTransaction(ctx, tx)
+	if err != nil {
+		log.Printf("Failed to send transaction: %s\n", err)
+
+	}
+	sent <- tx.Hash()
+
+	receipt, err := bind.WaitMined(ctx, client, tx)
+	if err != nil {
+		log.Printf("Error waiting transaction to be mined: %s\n", err)
+	}
+	mined <- receipt
+}
+
+func logTransactions(sent <-chan common.Hash, mined <-chan *types.Receipt) {
+	go func() {
+		for tx := range sent {
+			log.Printf("Transaction sent: %s", tx.Hex())
+		}
+		log.Printf("Done sending transactions\n")
+	}()
+	go func() {
+		for receipt := range mined {
+			b, err := receipt.MarshalJSON()
+			if err != nil {
+				log.Printf("%s", err)
+			}
+			log.Printf("Transaction mined !!: %s", string(b))
+		}
+		log.Printf("No more transactions to be mined\n")
+	}()
+}
+
+func buyWhenTriggered(client *ethclient.Client, ctx context.Context, router swap.DexRouter, sw swap.DexSwap, sent chan common.Hash, mined chan *types.Receipt) {
+	tx, err := sw.BuildTx(client, ctx, router)
+	if err != nil {
+		log.Fatalf("Failed to build swap transaction: %s\n", err)
+	}
+	go sendTxAsync(client, ctx, tx, sent, mined)
+}
+
 func main() {
+	var err error
 	ctx := context.Background()
 
-	wallet, err := eth.NewWallet("af44b8442594fd667f19779f79fc92e5f99aa8f150a3c0e171a942e33d9b8c08")
+	// configs
+	rpcUrl := "wss://hopeful-ride:cinch-taco-mute-yummy-cussed-suds@ws-nd-734-719-750.p2pify.com/ee56826bc7c085ae6b90d2114e6c1e28"
+	chainID := int64(56)
+
+	walletPriv := "af44b8442594fd667f19779f79fc92e5f99aa8f150a3c0e171a942e33d9b8c08"
+	inToken := common.HexToAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")
+	targetToken := common.HexToAddress("0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82")
+
+	// Wallet / network setup
+	wallet, err := eth.NewWallet(walletPriv, chainID)
 	if err != nil {
-		log.Fatalf("Failed to create wallet: %s\n", err.Error())
+		log.Fatalf("Failed to instantiate Wallet: %s\n", err.Error())
 	}
 
-	chainstackNode := &eth.Node{
-		Proto:    "wss",
-		Username: "hopeful-ride",
-		Password: "cinch-taco-mute-yummy-cussed-suds",
-		Address:  "ws-nd-734-719-750.p2pify.com/ee56826bc7c085ae6b90d2114e6c1e28",
-	}
-
-	bsc := &eth.Network{
-		ConnectAddress: chainstackNode.ConnectAddress(),
-		EthCurrency: &eth.Token{
-			Name:    "BNB",
-			Address: common.HexToAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"),
-		},
-	}
-
-	client, err := bsc.Connect(ctx)
+	network := &eth.Network{RpcUrl: rpcUrl}
+	client, err := network.Connect(ctx)
 	if err != nil {
 		log.Fatalf("Failed to connect to network: %s\n", err)
 	}
@@ -94,48 +129,41 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to get wallet balance at %s: %s", wallet.Address(), err)
 	}
-	fmt.Printf("Current balance: %f %s\n", balance, bsc.EthCurrency.Name)
+	fmt.Printf("Current ETH balance: %f \n", balance)
 
-	targetToken := common.HexToAddress("0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82")
-
-	factoryABI, err := abi.JSON(strings.NewReader(string(pancake.PancakeFactoryMetaData.ABI)))
+	// Dex contracts setup
+	factoryContract, err := eth.NewContract("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73", pancake.PancakeFactoryMetaData)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to instantiate PancakeFactory contract: %s", err)
+	}
+	routerContract, err := eth.NewContract("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73", pancake.PancakeRouterMetaData)
+	if err != nil {
+		log.Fatalf("Failed to instantiate PancakeRouter contract: %s", err)
+	}
+	routerClient, err := pancake.NewPancakeRouter(routerContract.Address, client)
+	if err != nil {
+		log.Fatalf("Failed to instantiate PancakeRouter contract client: %s\n", err)
 	}
 
-	pancakeFactory := Contract{
-		Address: common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"),
-		ABI:     factoryABI,
+	// swap setup
+	bnbForCake := swap.DexSwap{
+		FromWallet:   wallet,
+		ContractFunc: swap.ExactEthForTokens,
+		TokenIn:      inToken,
+		TokenOut:     targetToken,
+		Amount:       eth.ToWei(big.NewFloat(0.001), params.Ether),
+		GasStrategy:  "fast",
+		Expiration:   big.NewInt(60 * 60),
 	}
 
-	listenForPairCreated(client, ctx, pancakeFactory, targetToken)
+	maxParallelTx := 100
+	txsSent := make(chan common.Hash, maxParallelTx)
+	txsMined := make(chan *types.Receipt, maxParallelTx)
 
-	// routerAddress := common.HexToAddress("0x10ED43C718714eb63d5aA57B78B54704E256024E")
-	// pancakeRouter, err := pancake.NewPancakeRouter(routerAddress, client)
-	// if err != nil {
-	// 	log.Fatalf("Failed to instantiate PancakeSwap Router: %s\n", err)
-	// }
+	go logTransactions(txsSent, txsMined)
+	go listenForPairCreated(client, ctx, factoryContract, targetToken)
+	buyWhenTriggered(client, ctx, routerClient, bnbForCake, txsSent, txsMined)
 
-	// bnbForCake := &swap.DexSwap{
-	// 	Network:      bsc,
-	// 	FromWallet:   wallet,
-	// 	ContractFunc: swap.ExactEthForTokens,
-	// 	TokenIn:      bsc.Currency,
-	// 	TokenOut:     &eth.Token{Address: targetToken, Name: "CAKE"},
-	// 	Amount:       eth.ToWei(big.NewFloat(0.001), params.Ether),
-	// 	GasStrategy:  "fast",
-	// 	Expiration:   big.NewInt(60 * 60),
-	// }
-
-	// tx, err := bnbForCake.BuildTx(client, ctx, pancakeRouter)
-	// if err != nil {
-	// 	log.Fatalf("Failed to build swap transaction: %s\n", err)
-	// }
-
-	// receipt, err := eth.SendTxAndWait(client, ctx, tx)
-	// if err != nil {
-	// 	log.Fatalf("Failed to send transaction: %s\n", err)
-	// }
-
-	// fmt.Printf("details: %+v\n", receipt)
+	// go listenForSellTrigger()
+	// sellWhenTriggered(client, ctx, routerClient, bnbForCake, txsSent, txsMined)
 }
