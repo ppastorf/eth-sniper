@@ -9,16 +9,16 @@ import (
 	eth "sniper/internal/eth"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 type DexSwap struct {
-	Network      *eth.Network
 	ContractFunc contractFuncWrapper
 	FromWallet   *eth.Wallet
-	TokenIn      *eth.Token
-	TokenOut     *eth.Token
+	TokenIn      common.Address
+	TokenOut     common.Address
 	Amount       *big.Int
 	Expiration   *big.Int
 	GasStrategy  string
@@ -40,7 +40,7 @@ func (s *DexSwap) BuildTxOpts(client *ethclient.Client, ctx context.Context) (*b
 		return nil, err
 	}
 
-	opts, err := s.FromWallet.GetSignerOpts(s.Network)
+	opts, err := s.FromWallet.GetSignerOpts()
 	if err != nil {
 		return nil, err
 	}

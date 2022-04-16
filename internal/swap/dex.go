@@ -18,7 +18,7 @@ func ExactEthForTokens(router DexRouter, swap *DexSwap, opts *bind.TransactOpts)
 	return router.SwapExactETHForTokens(
 		opts,
 		big.NewInt(0),
-		[]common.Address{swap.TokenIn.Address, swap.TokenOut.Address},
+		[]common.Address{swap.TokenIn, swap.TokenOut},
 		swap.FromWallet.Address(),
 		swap.GetTxDeadlineFromNow(),
 	)

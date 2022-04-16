@@ -8,7 +8,6 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
@@ -16,13 +15,14 @@ import (
 type Wallet struct {
 	publicKey  *ecdsa.PublicKey
 	privateKey *ecdsa.PrivateKey
+	chainID    *big.Int
 }
 
 func (w *Wallet) Address() common.Address {
 	return crypto.PubkeyToAddress(*w.publicKey)
 }
 
-func NewWallet(privKey string) (*Wallet, error) {
+func NewWallet(privKey string, chainID int64) (*Wallet, error) {
 	priv, err := crypto.HexToECDSA(privKey)
 	if err != nil {
 		return nil, err
@@ -36,6 +36,7 @@ func NewWallet(privKey string) (*Wallet, error) {
 	w := &Wallet{
 		publicKey:  pub,
 		privateKey: priv,
+		chainID:    big.NewInt(chainID),
 	}
 
 	return w, nil
@@ -50,10 +51,6 @@ func (w *Wallet) GetEthBalance(client *ethclient.Client, ctx context.Context, un
 	return FromWei(balanceWei, unit), nil
 }
 
-func (w *Wallet) SignTransaction(tx *types.Transaction, network *Network) (*types.Transaction, error) {
-	return types.SignTx(tx, types.NewEIP155Signer(network.GetChainID()), w.privateKey)
-}
-
-func (w *Wallet) GetSignerOpts(network *Network) (*bind.TransactOpts, error) {
-	return bind.NewKeyedTransactorWithChainID(w.privateKey, network.GetChainID())
+func (w *Wallet) GetSignerOpts() (*bind.TransactOpts, error) {
+	return bind.NewKeyedTransactorWithChainID(w.privateKey, w.chainID)
 }

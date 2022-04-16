@@ -4,14 +4,7 @@ import (
 	"fmt"
 	"math/big"
 	"strings"
-
-	"github.com/ethereum/go-ethereum/common"
 )
-
-type Token struct {
-	Name    string
-	Address common.Address
-}
 
 func FromWei(wei *big.Int, unit float64) *big.Float {
 	asFloat := new(big.Float).SetPrec(256).SetMode(big.ToNearestEven)
