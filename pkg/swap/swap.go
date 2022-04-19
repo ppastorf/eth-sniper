@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"time"
 
-	eth "sniper/internal/eth"
+	eth "sniper/pkg/eth"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"

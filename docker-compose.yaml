@@ -13,7 +13,6 @@ services:
       - 8547
     volumes:
       - ./.volume/ethereum:/root/.ethereum
-      - ./config/geth.toml:/root/geth.toml
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 2s
