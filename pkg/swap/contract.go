@@ -1,4 +1,4 @@
-package eth
+package swap
 
 import (
 	"strings"
@@ -13,10 +13,8 @@ type Contract struct {
 	ABI     abi.ABI
 }
 
-func NewContract(address string, metadata *bind.MetaData) (*Contract, error) {
+func NewContract(addr common.Address, metadata *bind.MetaData) (*Contract, error) {
 	var err error
-
-	addr := common.HexToAddress(address)
 	ABI, err := abi.JSON(strings.NewReader(metadata.ABI))
 	if err != nil {
 		return nil, err

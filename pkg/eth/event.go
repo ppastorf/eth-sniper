@@ -18,7 +18,7 @@ type EventQuerySpec struct {
 
 type Event struct {
 	types.Log
-	ParsedData []interface{}
+	Data []interface{}
 }
 
 func ListenForEvents(client *ethclient.Client, ctx context.Context, spec EventQuerySpec) <-chan Event {

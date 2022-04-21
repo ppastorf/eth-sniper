@@ -10,25 +10,25 @@ import (
 
 type Config struct {
 	Raw struct {
-		RpcUrl      string `yaml:"rpcUrl"`
-		ChainID     int    `yaml:"chainID"`
-		PrivateKey  string `yaml:"privateKey"`
-		TargetToken string `yaml:"targetToken"`
-		InToken     string `yaml:"inToken"`
+		RpcUrl          string `yaml:"rpcUrl"`
+		ChainID         int64  `yaml:"chainID"`
+		PrivateKey      string `yaml:"privateKey"`
+		TargetTokenAddr string `yaml:"targetToken"`
+		InTokenAddr     string `yaml:"inToken"`
 	} `yaml:"config"`
-	RpcUrl      string         `yaml:"-"`
-	ChainID     int64          `yaml:"-"`
-	PrivateKey  common.Address `yaml:"-"`
-	TargetToken common.Address `yaml:"-"`
-	InToken     common.Address `yaml:"-"`
+	RpcUrl          string         `yaml:"-"`
+	ChainID         int64          `yaml:"-"`
+	PrivateKey      common.Address `yaml:"-"`
+	TargetTokenAddr common.Address `yaml:"-"`
+	InTokenAddr     common.Address `yaml:"-"`
 }
 
 func (c *Config) ParseValues() *Config {
 	c.RpcUrl = c.Raw.RpcUrl
-	c.ChainID = int64(c.Raw.ChainID)
+	c.ChainID = c.Raw.ChainID
 	c.PrivateKey = common.HexToAddress(c.Raw.PrivateKey)
-	c.TargetToken = common.HexToAddress(c.Raw.TargetToken)
-	c.InToken = common.HexToAddress(c.Raw.InToken)
+	c.TargetTokenAddr = common.HexToAddress(c.Raw.TargetTokenAddr)
+	c.InTokenAddr = common.HexToAddress(c.Raw.InTokenAddr)
 	return c
 }
 
