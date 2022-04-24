@@ -1,10 +1,70 @@
 package eth
 
 import (
+	"context"
 	"fmt"
+	"log"
 	"math/big"
+	"sniper/contracts/tokens"
 	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ethereum/go-ethereum/params"
 )
+
+type Token struct {
+	Address common.Address
+	Symbol  string
+	*tokens.Erc20Token
+}
+
+func NewToken(client *ethclient.Client, ctx context.Context, addr common.Address) (*Token, error) {
+	var err error
+	opts := &bind.CallOpts{
+		Pending:     false,
+		From:        addr,
+		BlockNumber: nil,
+		Context:     ctx,
+	}
+
+	tokenClient, err := tokens.NewErc20Token(addr, client)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to instatiate Token client: %s\n", err)
+	}
+
+	symbol, err := tokenClient.Symbol(opts)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to get symbol of Token at %s: %s", addr, err)
+	}
+
+	t := &Token{
+		addr,
+		symbol,
+		tokenClient,
+	}
+
+	return t, nil
+}
+
+func (t *Token) PrintBalanceAt(ctx context.Context, addr common.Address, pending bool) error {
+	var err error
+	opts := &bind.CallOpts{
+		Pending:     pending,
+		From:        addr,
+		BlockNumber: nil,
+		Context:     ctx,
+	}
+
+	balance, err := t.BalanceOf(opts, addr)
+	if err != nil {
+		return fmt.Errorf("Failed to get %s balance of address %s: %s", t.Symbol, addr.Hex(), err)
+	}
+
+	log.Printf("Current %s balance: %f \n", t.Symbol, FromWei(balance, params.Ether))
+	return nil
+}
 
 func FromWei(wei *big.Int, unit float64) *big.Float {
 	asFloat := new(big.Float).SetPrec(256).SetMode(big.ToNearestEven)

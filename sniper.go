@@ -9,7 +9,6 @@ import (
 	"math/big"
 
 	pancake "sniper/contracts/bsc/pancakeswap"
-	"sniper/contracts/tokens"
 	"sniper/pkg/config"
 	eth "sniper/pkg/eth"
 	"sniper/pkg/swap"
@@ -30,30 +29,41 @@ func main() {
 		log.Fatalf("Failed to read configuration file %s: %s", configPath, err)
 	}
 
-	// Wallet / network setup
+	// node setup
 	network := &eth.Network{RpcUrl: conf.RpcUrl}
 	client, err := network.Connect(ctx)
 	if (err != nil) || (!network.IsConnected()) {
 		log.Fatalf("Failed to connect to network: %s\n", err)
-	} else {
-		log.Printf("Connected to network via RPC node at %s", network.RpcUrl)
 	}
+	log.Printf("Connected to network via RPC node at %s", network.RpcUrl)
 
+	// wallet setup
 	wallet, err := eth.NewWallet(conf.Raw.PrivateKey, conf.ChainID)
 	if err != nil {
 		log.Fatalf("Failed to instantiate Wallet: %s\n", err.Error())
-	} else {
-		log.Printf("Using wallet of address %s", wallet.Address())
+	}
+	log.Printf("Using wallet of address %s", wallet.Address())
+
+	ethBalance, err := wallet.GetEthBalance(client, ctx, params.Ether)
+	if err != nil {
+		log.Fatalf("Failed to get ETH balance: %s", err)
+	}
+	log.Printf("Current ETH balance: %f \n", ethBalance)
+
+	// input token
+	inToken, err := eth.NewToken(client, ctx, conf.InTokenAddr)
+	if err != nil {
+		log.Fatalf("Failed to instantiate input Token: %s\n", err)
 	}
 
-	// contracts setup
-	opts := &bind.CallOpts{
-		Pending:     true,
-		From:        wallet.Address(),
-		BlockNumber: nil,
-		Context:     ctx,
+	// target token
+	targetToken, err := eth.NewToken(client, ctx, conf.TargetTokenAddr)
+	if err != nil {
+		log.Fatalf("Failed to instantiate input Token: %s\n", err)
 	}
 
+	// DEX contracts
+	// factory
 	factoryContract, err := swap.NewContract(
 		common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"),
 		pancake.PancakeFactoryMetaData,
@@ -66,6 +76,7 @@ func main() {
 		log.Fatalf("Failed to instantiate PancakeRouter contract client: %s\n", err)
 	}
 
+	// router
 	routerContract, err := swap.NewContract(
 		common.HexToAddress("0x10ED43C718714eb63d5aA57B78B54704E256024E"),
 		pancake.PancakeRouterMetaData,
@@ -78,36 +89,17 @@ func main() {
 		log.Fatalf("Failed to instantiate PancakeRouter contract client: %s\n", err)
 	}
 
-	inToken, err := tokens.NewErc20Token(conf.InTokenAddr, client)
-	if err != nil {
-		log.Fatalf("Failed to instatiate InToken contract: %s\n", err)
-	}
-	inTokenSymbol, err := inToken.Symbol(opts)
-	if err != nil {
-		log.Fatalf("Failed to get symbol of Token %s: %s", conf.InTokenAddr, err)
+	opts := &bind.CallOpts{
+		Pending:     true,
+		From:        wallet.Address(),
+		BlockNumber: nil,
+		Context:     ctx,
 	}
 
-	balance, err := inToken.BalanceOf(opts, wallet.Address())
-	if err != nil {
-		log.Fatalf("Failed to get %s balance of address %s: %s", inTokenSymbol, wallet.Address().Hex(), err)
-	} else {
-		log.Printf("Current %s balance: %f \n", inTokenSymbol, eth.FromWei(balance, params.Ether))
-	}
+	// bot logic
 
-	// swap setup
-	_ = swap.DexSwap{
-		FromWallet:   wallet,
-		ContractFunc: swap.ExactEthForTokens,
-		TokenIn:      conf.InTokenAddr,
-		TokenOut:     conf.TargetTokenAddr,
-		Amount:       eth.ToWei(big.NewFloat(0.001), params.Ether),
-		GasStrategy:  "fast",
-		Expiration:   big.NewInt(60 * 60),
-	}
-
-	var pairAddr common.Address
-
-	pairAddr, err = factoryClient.GetPair(opts, conf.InTokenAddr, conf.TargetTokenAddr)
+	// get pair
+	pairAddr, err := factoryClient.GetPair(opts, conf.InTokenAddr, conf.TargetTokenAddr)
 	if err != nil {
 		log.Fatalf("Failed to get token pair: %s\n", err)
 	}
@@ -132,16 +124,22 @@ func main() {
 		log.Fatalf("Failed to instantiate Pair contract: %s", err)
 	}
 
+	// get liquidity
 	inTokenLiquidity, err := inToken.BalanceOf(opts, pairAddr)
 	if err != nil {
 		log.Fatalf("Failed to get balance for Pair contract %s", err)
 	}
+	log.Printf("%s Liquidity for Pair: %f\n", inToken.Symbol, eth.FromWei(inTokenLiquidity, params.Ether))
 
-	log.Printf("Liquidity for Pair: %f %s\n", eth.FromWei(inTokenLiquidity, params.Ether), inTokenSymbol)
+	targetTokenLiquidity, err := targetToken.BalanceOf(opts, pairAddr)
+	if err != nil {
+		log.Fatalf("Failed to get balance for Pair contract %s", err)
+	}
+	log.Printf("%s Liquidity for Pair: %f\n", targetToken.Symbol, eth.FromWei(targetTokenLiquidity, params.Ether))
 
 	var minLiquidity int64 = 1
 	if inTokenLiquidity.Cmp(big.NewInt(minLiquidity)) == 1 {
-		log.Fatalf("Liquidity at contract is higher than minimun specified %d. We are too late!", minLiquidity)
+		log.Fatalf("Liquidity at contract is higher than %d.", minLiquidity)
 	} else {
 		liquidityAdded := liquidityAddedTrigger(client, ctx, pairContract)
 		select {
@@ -154,7 +152,16 @@ func main() {
 
 }
 
-// send tx
+// send swap
+// sw = swap.DexSwap{
+// 	FromWallet:   wallet,
+// 	ContractFunc: swap.ExactEthForTokens,
+// 	TokenIn:      conf.InTokenAddr,
+// 	TokenOut:     conf.TargetTokenAddr,
+// 	Amount:       eth.ToWei(big.NewFloat(0.001), params.Ether),
+// 	GasStrategy:  "fast",
+// 	Expiration:   big.NewInt(60 * 60),
+// }
 // tx, err := sw.BuildTx(client, ctx, routerClient)
 // fmt.Printf("tx: \n%+v\n", tx)
 // if err != nil {
