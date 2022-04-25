@@ -1,4 +1,4 @@
-package swap
+package eth
 
 import (
 	"strings"

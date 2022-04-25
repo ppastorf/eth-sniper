@@ -15,34 +15,33 @@ import (
 )
 
 type Token struct {
-	Address common.Address
-	Symbol  string
+	*Contract
 	*tokens.Erc20Token
+	Symbol string
 }
 
-func NewToken(client *ethclient.Client, ctx context.Context, addr common.Address) (*Token, error) {
+func NewToken(client *ethclient.Client, opts *bind.CallOpts, address common.Address) (*Token, error) {
 	var err error
-	opts := &bind.CallOpts{
-		Pending:     false,
-		From:        addr,
-		BlockNumber: nil,
-		Context:     ctx,
-	}
 
-	tokenClient, err := tokens.NewErc20Token(addr, client)
+	tokenContract, err := NewContract(address, tokens.Erc20TokenMetaData)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to instatiate Token client: %s\n", err)
+		return nil, fmt.Errorf("Failed to instantiate Token contract: %s\n", err)
+	}
+	tokenClient, err := tokens.NewErc20Token(address, client)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to instantiate Token client: %s\n", err)
 	}
 
 	symbol, err := tokenClient.Symbol(opts)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to get symbol of Token at %s: %s", addr, err)
+		log.Printf("Failed to get symbol of Token at %s: %s", address, err)
+		symbol = "TKN"
 	}
 
 	t := &Token{
-		addr,
-		symbol,
+		tokenContract,
 		tokenClient,
+		symbol,
 	}
 
 	return t, nil

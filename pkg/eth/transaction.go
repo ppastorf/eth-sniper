@@ -9,7 +9,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-func sendTx(client *ethclient.Client, ctx context.Context, tx *types.Transaction) {
+func SendTx(client *ethclient.Client, ctx context.Context, tx *types.Transaction) {
 	var err error
 
 	err = client.SendTransaction(ctx, tx)
@@ -20,11 +20,11 @@ func sendTx(client *ethclient.Client, ctx context.Context, tx *types.Transaction
 
 	receipt, err := bind.WaitMined(ctx, client, tx)
 	if err != nil {
-		log.Printf("Error waiting transaction to be mined: %s\n", err)
+		log.Printf("Error waiting transaction mining: %s\n", err)
 	}
 	b, err := receipt.MarshalJSON()
 	if err != nil {
-		log.Printf("%s", err)
+		log.Printf("Cannot decode transaction receipt: %s", err)
 	}
 	log.Printf("Transaction mined: %s\n%s\n", tx.Hash().Hex(), string(b))
 }

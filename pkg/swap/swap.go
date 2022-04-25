@@ -15,13 +15,13 @@ import (
 )
 
 type DexSwap struct {
-	ContractFunc contractFuncWrapper
-	FromWallet   *eth.Wallet
-	TokenIn      common.Address
-	TokenOut     common.Address
-	Amount       *big.Int
-	Expiration   *big.Int
-	GasStrategy  string
+	SwapFunc    swapFuncWrapper
+	FromWallet  *eth.Wallet
+	TokenIn     common.Address
+	TokenOut    common.Address
+	Amount      *big.Int
+	Expiration  *big.Int
+	GasStrategy string
 }
 
 func (s *DexSwap) GetTxDeadlineFromNow() *big.Int {
@@ -61,7 +61,7 @@ func (s *DexSwap) BuildTx(client *ethclient.Client, ctx context.Context, router 
 		return nil, fmt.Errorf("Failed to build swap transaction options: %s\n", err)
 	}
 
-	tx, err := s.ContractFunc(router, s, opts)
+	tx, err := s.SwapFunc(router, s, opts)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to build contract method call: %s\n", err)
 	}

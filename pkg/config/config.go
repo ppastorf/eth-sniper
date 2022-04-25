@@ -15,12 +15,16 @@ type Config struct {
 		PrivateKey      string `yaml:"privateKey"`
 		TargetTokenAddr string `yaml:"targetToken"`
 		InTokenAddr     string `yaml:"inToken"`
+		FactoryAddress  string `yaml:"factoryAddress"`
+		RouterAddress   string `yaml:"routerAddress"`
 	} `yaml:"config"`
 	RpcUrl          string         `yaml:"-"`
 	ChainID         int64          `yaml:"-"`
 	PrivateKey      common.Address `yaml:"-"`
 	TargetTokenAddr common.Address `yaml:"-"`
 	InTokenAddr     common.Address `yaml:"-"`
+	FactoryAddress  common.Address `yaml:"-"`
+	RouterAddress   common.Address `yaml:"-"`
 }
 
 func (c *Config) ParseValues() *Config {
@@ -29,6 +33,9 @@ func (c *Config) ParseValues() *Config {
 	c.PrivateKey = common.HexToAddress(c.Raw.PrivateKey)
 	c.TargetTokenAddr = common.HexToAddress(c.Raw.TargetTokenAddr)
 	c.InTokenAddr = common.HexToAddress(c.Raw.InTokenAddr)
+	c.FactoryAddress = common.HexToAddress(c.Raw.FactoryAddress)
+	c.RouterAddress = common.HexToAddress(c.Raw.RouterAddress)
+
 	return c
 }
 

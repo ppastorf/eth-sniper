@@ -4,16 +4,17 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math/big"
 	eth "sniper/pkg/eth"
-	"sniper/pkg/swap"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ethereum/go-ethereum/params"
 )
 
-func pairCreatedTrigger(client *ethclient.Client, ctx context.Context, factory *swap.Contract, inToken common.Address, targetToken common.Address) chan common.Address {
+func pairCreatedTrigger(client *ethclient.Client, ctx context.Context, factory *eth.Contract, inToken common.Address, targetToken common.Address) chan common.Address {
 	trigger := make(chan common.Address)
 
 	eventSignature := crypto.Keccak256Hash([]byte("PairCreated(address,address,address,uint256)"))
@@ -44,7 +45,7 @@ func pairCreatedTrigger(client *ethclient.Client, ctx context.Context, factory *
 			if (tokenA == inTokenHash && tokenB == targetTokenHash) ||
 				(tokenB == inTokenHash && tokenA == targetTokenHash) {
 
-				address := common.HexToAddress(pair.Data[0].(string))
+				address := pair.Data[0].(common.Address)
 				fmt.Printf("PairCreated: %s\n", address)
 				fmt.Printf("\tTokenA: %s\n", tokenA.Hex())
 				fmt.Printf("\tTokenB: %s\n", tokenA.Hex())
@@ -57,10 +58,10 @@ func pairCreatedTrigger(client *ethclient.Client, ctx context.Context, factory *
 	return trigger
 }
 
-func liquidityAddedTrigger(client *ethclient.Client, ctx context.Context, pair *swap.Contract) chan common.Address {
-	trigger := make(chan common.Address)
+func liquidityAddedTrigger(client *ethclient.Client, ctx context.Context, pair *eth.Contract) chan bool {
+	trigger := make(chan bool)
 
-	eventSignature := crypto.Keccak256Hash([]byte("Mint(address,uint,uint)"))
+	eventSignature := crypto.Keccak256Hash([]byte("Mint(address,uint256,uint256)"))
 	querySpec := eth.EventQuerySpec{
 		Name:        "Mint",
 		ContractABI: pair.ABI,
@@ -70,7 +71,7 @@ func liquidityAddedTrigger(client *ethclient.Client, ctx context.Context, pair *
 		},
 	}
 
-	lpTokensMinted := eth.ListenForEvents(client, ctx, querySpec)
+	tokensMinted := eth.ListenForEvents(client, ctx, querySpec)
 
 	go func() {
 		defer close(trigger)
@@ -78,15 +79,35 @@ func liquidityAddedTrigger(client *ethclient.Client, ctx context.Context, pair *
 		case <-ctx.Done():
 			log.Printf("Done")
 			return
-		case minted := <-lpTokensMinted:
+		case minted := <-tokensMinted:
 			senderAddr := minted.Topics[1].Hex()
-			amountA := minted.Data[0].(uint)
-			amountB := minted.Data[1].(uint)
+			amountA := minted.Data[0].(*big.Int)
+			amountB := minted.Data[1].(*big.Int)
 
 			fmt.Printf("Liquidity added by %s\n", senderAddr)
-			fmt.Printf("\tAmountA: %d\n", amountA)
-			fmt.Printf("\tAmountB: %d\n", amountB)
-			trigger <- common.HexToAddress(senderAddr)
+			fmt.Printf("\tAmountA: %d\n", eth.FromWei(amountA, params.Ether))
+			fmt.Printf("\tAmountB: %d\n", eth.FromWei(amountB, params.Ether))
+			trigger <- true
+			return
+		}
+	}()
+	return trigger
+}
+
+func sellTrigger(client *ethclient.Client, ctx context.Context, pair *eth.Contract) chan bool {
+	trigger := make(chan bool)
+	price := make(chan *big.Int)
+
+	// TODO
+
+	go func() {
+		defer close(trigger)
+		select {
+		case <-ctx.Done():
+			log.Printf("Done")
+			return
+		case <-price:
+			trigger <- true
 			return
 		}
 	}()
