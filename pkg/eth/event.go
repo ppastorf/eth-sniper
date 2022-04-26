@@ -37,10 +37,10 @@ func ListenForEvents(client *ethclient.Client, ctx context.Context, spec EventQu
 		for {
 			select {
 			case <-ctx.Done():
+				log.Printf("Done listening for %s events", spec.Name)
 				return
 			case err := <-sub.Err():
-				log.Printf("Received error from event logs: %s", err)
-				return
+				log.Printf("Received error from %s event logs: %s", spec.Name, err)
 			case eventLog := <-logs:
 				parsedData, err := spec.ContractABI.Unpack(spec.Name, eventLog.Data)
 				if err != nil {

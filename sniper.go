@@ -4,8 +4,8 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
+	"math/big"
 
 	pancake "sniper/contracts/bsc/pancakeswap"
 	"sniper/pkg/config"
@@ -78,19 +78,18 @@ func main() {
 	// bot logic
 
 	// get pair
+	ctx, cancel := context.WithCancel(context.Background())
+
 	pairAddr, _ := DEX.FactoryClient.GetPair(opts, conf.InTokenAddr, conf.TargetTokenAddr)
 	if pairAddr != *new(common.Address) {
 		log.Printf("Liquidity pair for specified tokens exists: %s\n", pairAddr)
 	} else {
 		log.Printf("No pair found for specified tokens\n")
-		pairCreated := pairCreatedTrigger(client, ctx, DEX.FactoryContract, conf.InTokenAddr, conf.TargetTokenAddr)
-		select {
-		case <-ctx.Done():
-			log.Fatalf("Done")
-		case addr := <-pairCreated:
-			fmt.Printf("PAIR CREATED AT ADDRESS %s!\n", addr.Hex())
+		pairsCreated := pairCreatedTrigger(client, ctx, DEX.FactoryContract, conf.InTokenAddr, conf.TargetTokenAddr)
+		for addr := range pairsCreated {
+			log.Printf("PAIR CREATED AT ADDRESS %s!\n", addr.Hex())
 			pairAddr = addr
-			break
+			cancel()
 		}
 	}
 
@@ -111,81 +110,62 @@ func main() {
 	log.Printf("%s liquidity: %f\n", inToken.Symbol, eth.FromWei(inTokenLiquidity, params.Ether))
 	log.Printf("%s liquidity: %f\n", targetToken.Symbol, eth.FromWei(targetTokenLiquidity, params.Ether))
 
-	// var minLiquidity int64 = 10
-	// if inTokenLiquidity.Cmp(big.NewInt(minLiquidity)) == 1 {
-	// 	log.Fatalf("Liquidity at contract is higher than %d. (%d)", minLiquidity, inTokenLiquidity)
+	// if inTokenLiquidity.Cmp(conf.MinLiquidity) != -1 {
+	// 	log.Fatalf("Liquidity at contract is already equal or higher than minimium %f", eth.FromWei(conf.MinLiquidity, params.Ether))
 	// }
-	// var tokensBought *big.Float
 
+	ctx, cancel = context.WithCancel(context.Background())
 	liquidityAdded := liquidityAddedTrigger(client, ctx, pairContract)
-	select {
-	case <-ctx.Done():
-		log.Fatalf("Done")
-	case <-liquidityAdded:
-		log.Printf("BUY BUY BUY!!\n")
-		// sw := swap.DexSwap{
-		// 	FromWallet:  wallet,
-		// 	SwapFunc:    swap.ExactEthForTokens,
-		// 	TokenIn:     conf.InTokenAddr,
-		// 	TokenOut:    conf.TargetTokenAddr,
-		// 	Amount:      eth.ToWei(big.NewFloat(0.001), params.Ether),
-		// 	GasStrategy: "fast",
-		// 	Expiration:  big.NewInt(60 * 60),
+	for _ = range liquidityAdded {
+		// totalLiq := new(big.Int).Add(inTokenLiquidity, amount)
+		// if totalLiq.Cmp(conf.MinLiquidity) == -1 {
+		// 	continue
 		// }
 
-		// tx, err := sw.BuildTx(client, ctx, DEX.RouterClient)
-		// if err != nil {
-		// 	log.Fatalf("Failed to build swap transaction: %s\n", err)
-		// }
+		sw := swap.DexSwap{
+			FromWallet:  wallet,
+			SwapFunc:    swap.ExactEthForTokens,
+			TokenIn:     conf.InTokenAddr,
+			TokenOut:    conf.TargetTokenAddr,
+			Amount:      conf.BuyAmount,
+			GasStrategy: "fast",
+			Expiration:  big.NewInt(60 * 60),
+		}
 
-		// err = client.SendTransaction(ctx, tx)
-		// if err != nil {
-		// 	log.Printf("Failed to send transaction: %s\n", err)
-		// }
-		// log.Printf("Transaction sent: %s", tx.Hash().Hex())
+		tx, err := sw.BuildTx(client, ctx, DEX.RouterClient)
+		if err != nil {
+			log.Fatalf("Failed to build swap transaction: %s\n", err)
+		}
 
-		// receipt, err := bind.WaitMined(ctx, client, tx)
-		// if err != nil {
-		// 	log.Printf("Error waiting for transaction mining: %s\n", err)
-		// }
+		err = client.SendTransaction(ctx, tx)
+		if err != nil {
+			log.Printf("Failed to send transaction: %s\n", err)
+		}
+		log.Printf("Transaction sent: %s", tx.Hash().Hex())
 
-		// bytes, err := receipt.MarshalJSON()
-		// if err != nil {
-		// 	log.Printf("Cannot decode transaction receipt: %s", err)
-		// }
-		// log.Printf("Transaction mined: %s\n%s\n", tx.Hash().Hex(), string(bytes))
+		receipt, err := bind.WaitMined(ctx, client, tx)
+		if err != nil {
+			log.Printf("Error waiting for transaction mining: %s\n", err)
+		}
+		log.Printf("Transaction mined: %s\n", tx.Hash().Hex())
 
-		// tokensBought = eth.FromWei(new(big.Int), params.Ether) //
-		// buyPrice := new(big.Float)                             //
-		// gasUsed := new(big.Int).SetUint64(receipt.GasUsed)
-		// totalFee := new(big.Int).Mul(gasUsed, tx.GasPrice())
+		// todo
+		tokensBought := eth.FromWei(new(big.Int), params.Ether)
+		buyPrice := new(big.Float)
 
-		// log.Printf(
-		// 	`PEW PEW! Snipe successfull. Bought %f %s for %f %s each
-		// 		Spent: %f %s
-		// 		Total fees: %f %s
-		// 		Total transaction cost: %f %s`,
-		// 	tokensBought, targetToken.Symbol, buyPrice, inToken.Symbol,
-		// 	eth.FromWei(tx.Value(), params.Ether), inToken.Symbol,
-		// 	eth.FromWei(totalFee, params.Ether), inToken.Symbol,
-		// 	eth.FromWei(tx.Cost(), params.Ether), inToken.Symbol,
-		// )
-	}
+		gasUsed := new(big.Int).SetUint64(receipt.GasUsed)
+		totalFee := new(big.Int).Mul(gasUsed, tx.GasPrice())
 
-	sell := sellTrigger(client, ctx, pairContract)
-	select {
-	case <-ctx.Done():
-		log.Fatalf("Done")
-	case <-sell:
-		log.Printf("SELL SELL SELL!!\n")
-		// 	_ = swap.DexSwap{
-		// 		FromWallet:  wallet,
-		// 		SwapFunc:    swap.ExactTokensForEth,
-		// 		TokenIn:     conf.TargetTokenAddr,
-		// 		TokenOut:    conf.InTokenAddr,
-		// 		Amount:      eth.ToWei(tokensBought, params.Ether),
-		// 		GasStrategy: "fast",
-		// 		Expiration:  big.NewInt(60 * 60),
-		// 	}
+		log.Printf(
+			`Sniped %f %s at %f %s
+				Spent: %f %s
+				Fees: %f %s
+				Total cost: %f %s`,
+			tokensBought, targetToken.Symbol, buyPrice, inToken.Symbol,
+			eth.FromWei(tx.Value(), params.Ether), inToken.Symbol,
+			eth.FromWei(totalFee, params.Ether), inToken.Symbol,
+			eth.FromWei(tx.Cost(), params.Ether), inToken.Symbol,
+		)
+		cancel()
 	}
 }

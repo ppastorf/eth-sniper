@@ -2,21 +2,26 @@ package config
 
 import (
 	"io/ioutil"
+	"math/big"
 	"path/filepath"
+	"sniper/pkg/eth"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/params"
 	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
 	Raw struct {
-		RpcUrl          string `yaml:"rpcUrl"`
-		ChainID         int64  `yaml:"chainID"`
-		PrivateKey      string `yaml:"privateKey"`
-		TargetTokenAddr string `yaml:"targetToken"`
-		InTokenAddr     string `yaml:"inToken"`
-		FactoryAddress  string `yaml:"factoryAddress"`
-		RouterAddress   string `yaml:"routerAddress"`
+		RpcUrl          string  `yaml:"rpcUrl"`
+		ChainID         int64   `yaml:"chainID"`
+		PrivateKey      string  `yaml:"privateKey"`
+		TargetTokenAddr string  `yaml:"targetToken"`
+		InTokenAddr     string  `yaml:"inToken"`
+		FactoryAddress  string  `yaml:"factoryAddress"`
+		RouterAddress   string  `yaml:"routerAddress"`
+		BuyAmount       float64 `yaml:"buyAmount"`
+		MinLiquidity    float64 `yaml:"minLiquidity"`
 	} `yaml:"config"`
 	RpcUrl          string         `yaml:"-"`
 	ChainID         int64          `yaml:"-"`
@@ -25,6 +30,8 @@ type Config struct {
 	InTokenAddr     common.Address `yaml:"-"`
 	FactoryAddress  common.Address `yaml:"-"`
 	RouterAddress   common.Address `yaml:"-"`
+	BuyAmount       *big.Int       `yaml:"-"`
+	MinLiquidity    *big.Int       `yaml:"-"`
 }
 
 func (c *Config) ParseValues() *Config {
@@ -35,7 +42,8 @@ func (c *Config) ParseValues() *Config {
 	c.InTokenAddr = common.HexToAddress(c.Raw.InTokenAddr)
 	c.FactoryAddress = common.HexToAddress(c.Raw.FactoryAddress)
 	c.RouterAddress = common.HexToAddress(c.Raw.RouterAddress)
-
+	c.BuyAmount = eth.ToWei(big.NewFloat(c.Raw.BuyAmount), params.Ether)
+	c.MinLiquidity = eth.ToWei(big.NewFloat(c.Raw.MinLiquidity), params.Ether)
 	return c
 }
 
