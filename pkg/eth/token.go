@@ -20,18 +20,24 @@ type Token struct {
 	Symbol string
 }
 
-func NewToken(client *ethclient.Client, opts *bind.CallOpts, address common.Address) (*Token, error) {
+func NewToken(client *ethclient.Client, address common.Address) (*Token, error) {
 	var err error
 
 	tokenContract, err := NewContract(address, tokens.Erc20TokenMetaData)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to instantiate Token contract: %s\n", err)
 	}
+
 	tokenClient, err := tokens.NewErc20Token(address, client)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to instantiate Token client: %s\n", err)
 	}
 
+	opts := &bind.CallOpts{
+		Pending:     false,
+		BlockNumber: nil,
+		Context:     context.Background(),
+	}
 	symbol, err := tokenClient.Symbol(opts)
 	if err != nil {
 		log.Printf("Failed to get symbol of Token at %s: %s", address, err)
