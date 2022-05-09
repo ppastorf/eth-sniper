@@ -4,10 +4,10 @@ https://docs.binance.org/smart-chain/wallet/metamask.html
 
 # todo
 
-- get token prices
 - max buy price
 - sniped amount, price
 - gas strategy, gas price boost
+- node mempool configs
 
 # go
 

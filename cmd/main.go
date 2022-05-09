@@ -12,24 +12,25 @@ import (
 	"sniper/pkg/swap"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/ethclient/gethclient"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 )
 
-func buyTokens(client *ethclient.Client, sw *swap.DexSwap, DEX *swap.Dex, coinSymbol string, targetToken *eth.Token) error {
+func buyTokens(client *ethclient.Client, sw *swap.DexSwap, DEX *swap.Dex, targetToken *eth.Token) (*types.Receipt, error) {
 	var err error
 	ctx := context.Background()
 
-	tx, err := sw.BuildTx(client, ctx, DEX.RouterClient)
+	tx, err := sw.BuildTx(client, ctx, DEX.Router)
 	if err != nil {
-		return fmt.Errorf("Failed to build swap transaction: %s", err)
+		return nil, fmt.Errorf("Failed to build swap transaction: %s", err)
 	}
 
 	err = client.SendTransaction(ctx, tx)
 	if err != nil {
-		return fmt.Errorf("Failed to send transaction: %s", err)
+		return nil, fmt.Errorf("Failed to send transaction: %s", err)
 	} else {
 		log.Printf("Transaction sent: %s", tx.Hash().Hex())
 	}
@@ -52,13 +53,13 @@ func buyTokens(client *ethclient.Client, sw *swap.DexSwap, DEX *swap.Dex, coinSy
 			Spent: %f %s
 			Fees: %f %s
 			Total cost: %f %s`,
-		tokensBought, targetToken.Symbol, buyPrice, coinSymbol,
-		eth.FromWei(tx.Value(), params.Ether), coinSymbol,
-		eth.FromWei(totalFee, params.Ether), coinSymbol,
-		eth.FromWei(tx.Cost(), params.Ether), coinSymbol,
+		tokensBought, targetToken.Symbol, buyPrice, "BNB",
+		eth.FromWei(tx.Value(), params.Ether), "BNB",
+		eth.FromWei(totalFee, params.Ether), "BNB",
+		eth.FromWei(tx.Cost(), params.Ether), "BNB",
 	)
 
-	return nil
+	return receipt, nil
 }
 
 func main() {
@@ -121,11 +122,12 @@ func main() {
 	}
 
 	<-conf.BuyTrigger.Set(client, geth, DEX, targetToken)
-	err = buyTokens(client, buySwap, DEX, conf.EthSymbol, targetToken)
+	_, err = buyTokens(client, buySwap, DEX, targetToken)
 	if err != nil {
 		log.Fatalf("Failed to buy tokens: %s\n", err)
 	}
 
+	// sell
 	// sellSwap := &swap.DexSwap{
 	// 	FromWallet: wallet,
 	// 	SwapFunc:   swap.ExactEthForTokens,
@@ -136,14 +138,8 @@ func main() {
 	// 	Expiration:  big.NewInt(60 * 60),
 	// }
 
-	// sellTrigger := &triggers.SellTrigger{
-	// 	Deadline: conf.BuyDeadline,
-	// }
-
-	// sellAttempts := 5
-	// <-sellTrigger.Set(client, geth, DEX, targetToken)
 	// <-conf.SellTrigger.Set(client, geth, DEX, targetToken)
-	// err = sellTokens(client, buySwap, DEX, conf.EthSymbol, targetToken)
+	// _, err = buyTokens(client, sellSwap, DEX, targetToken)
 	// if err != nil {
 	// 	log.Fatalf("Failed to sell tokens: %s\n", err)
 	// }

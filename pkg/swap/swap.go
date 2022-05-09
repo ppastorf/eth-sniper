@@ -68,3 +68,27 @@ func (s *DexSwap) BuildTx(client *ethclient.Client, ctx context.Context, router 
 
 	return tx, nil
 }
+
+// Supported swap methods
+type swapFuncWrapper func(router DexRouter, swap *DexSwap, opts *bind.TransactOpts) (*types.Transaction, error)
+
+func ExactEthForTokens(router DexRouter, swap *DexSwap, opts *bind.TransactOpts) (*types.Transaction, error) {
+	return router.SwapExactETHForTokensSupportingFeeOnTransferTokens(
+		opts,
+		big.NewInt(0), // amountOutMin
+		[]common.Address{swap.TokenIn, swap.TokenOut},
+		swap.FromWallet.Address(),
+		swap.GetTxDeadlineFromNow(),
+	)
+}
+
+func ExactTokensForEth(router DexRouter, swap *DexSwap, opts *bind.TransactOpts) (*types.Transaction, error) {
+	return router.SwapExactTokensForETHSupportingFeeOnTransferTokens(
+		opts,
+		swap.Amount,   // amountIn
+		big.NewInt(0), // amountOutMin
+		[]common.Address{swap.TokenIn, swap.TokenOut},
+		swap.FromWallet.Address(),
+		swap.GetTxDeadlineFromNow(),
+	)
+}

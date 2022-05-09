@@ -31,8 +31,6 @@ func (bt *BuyTrigger) Set(client *ethclient.Client, geth *gethclient.Client, DEX
 	trigger := make(chan struct{})
 	fire := func() { trigger <- struct{}{} }
 
-	log.Printf("Mempool filter: %+v\n", bt.MempoolFilter)
-
 	deadline, _ := context.WithCancel(context.Background())
 	if bt.Deadline != nil {
 		deadline, _ = context.WithDeadline(deadline, *bt.Deadline)

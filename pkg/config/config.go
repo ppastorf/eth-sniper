@@ -2,12 +2,14 @@ package config
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"math/big"
 	"path/filepath"
 	"sniper/pkg/eth"
 	"sniper/pkg/triggers"
+	"strings"
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -18,7 +20,13 @@ import (
 type ConfigFile struct {
 	PrivateKey string `yaml:"privateKey"`
 	Network    struct {
-		RpcUrl         string `yaml:"rpcUrl"`
+		Rpc struct {
+			Url      string `yaml:"url"`
+			Login    string `yaml:"login"`
+			Password string `yaml:"password"`
+		} `yaml:"rpc"`
+		RpcLogin       string `yaml:"rpcLogin"`
+		RpcPassword    string `yaml:"rpcPassword"`
 		ChainID        int64  `yaml:"chainID"`
 		FactoryAddress string `yaml:"factoryAddress"`
 		RouterAddress  string `yaml:"routerAddress"`
@@ -34,9 +42,12 @@ type ConfigFile struct {
 		MaxBuyPrice   float64 `yaml:"maxBuyPrice"`
 	} `yaml:"targetToken"`
 	BuyTrigger struct {
-		BuyDeadline        string   `yaml:"deadline"`
+		Deadline           string   `yaml:"deadline"`
 		LiquidityProviders []string `yaml:"liquidityProviders"`
 	} `yaml:"buyTrigger"`
+	SellTrigger struct {
+		Deadline string `yaml:"deadline"`
+	} `yaml:"sellTrigger"`
 }
 
 type Config struct {
@@ -55,7 +66,8 @@ type Config struct {
 	TargetTokenStartingPrice *big.Float
 	TargetTokenMaxBuyPrice   *big.Float
 
-	BuyTrigger triggers.BuyTrigger
+	BuyTrigger  triggers.BuyTrigger
+	SellTrigger triggers.SellTrigger
 }
 
 func parseValues(raw ConfigFile) *Config {
@@ -64,20 +76,29 @@ func parseValues(raw ConfigFile) *Config {
 
 	c.PrivateKey = raw.PrivateKey
 
-	c.RpcUrl = raw.Network.RpcUrl
+	rpcAuth := ""
+	if raw.Network.Rpc.Login != "" {
+		rpcAuth = fmt.Sprintf("%s:%s@", raw.Network.Rpc.Login, raw.Network.Rpc.Password)
+	}
+	rpcUrl := strings.Split(raw.Network.Rpc.Url, "://")
+	c.RpcUrl = fmt.Sprintf("%s://%s%s", rpcUrl[0], rpcAuth, rpcUrl[1])
+
 	c.ChainID = raw.Network.ChainID
 	c.RouterAddress = common.HexToAddress(raw.Network.RouterAddress)
 	c.FactoryAddress = common.HexToAddress(raw.Network.FactoryAddress)
 	c.EthSymbol = raw.Network.CoinSymbol
 
 	c.InTokenAddr = common.HexToAddress(raw.InToken.Address)
-	c.InTokenBuyAmount = eth.ToWei(big.NewFloat(raw.InToken.BuyAmount), params.Ether)
+	c.InTokenBuyAmount, err = eth.ToWei(big.NewFloat(raw.InToken.BuyAmount), params.Ether)
+	if err != nil {
+		log.Fatalf("Failed to parse buyAmount")
+	}
 
 	c.TargetTokenAddr = common.HexToAddress(raw.TargetToken.Address)
 	c.TargetTokenStartingPrice = big.NewFloat(raw.TargetToken.StartingPrice)
 	c.TargetTokenMaxBuyPrice = big.NewFloat(raw.TargetToken.MaxBuyPrice)
 
-	c.BuyTrigger.Deadline, err = parseTimeStr("UTC", time.RFC3339, raw.BuyTrigger.BuyDeadline)
+	c.BuyTrigger.Deadline, err = parseTimeStr("UTC", time.RFC3339, raw.BuyTrigger.Deadline)
 	if err != nil {
 		log.Printf("Failed to parse buyDeadline, will not buy based on time.")
 	}
@@ -92,6 +113,11 @@ func parseValues(raw ConfigFile) *Config {
 		To:                []common.Address{c.RouterAddress},
 		Methods:           []string{"addLiquidityETH", "addLiquidity"},
 		TargetTokenFields: []string{"token", "tokenA", "tokenB"},
+	}
+
+	c.SellTrigger.Deadline, err = parseTimeStr("UTC", time.RFC3339, raw.SellTrigger.Deadline)
+	if err != nil {
+		log.Printf("Failed to parse sellDeadline, will not sell based on time.")
 	}
 
 	return c
