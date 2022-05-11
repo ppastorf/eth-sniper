@@ -17,9 +17,9 @@ import (
 type DexSwap struct {
 	SwapFunc    swapFuncWrapper
 	FromWallet  *eth.Wallet
-	TokenIn     common.Address
-	TokenOut    common.Address
-	Amount      *big.Int
+	TokenIn     *eth.Token
+	TokenOut    *eth.Token
+	AmountIn    *big.Int
 	Expiration  *big.Int
 	GasStrategy string
 }
@@ -46,7 +46,7 @@ func (s *DexSwap) BuildTxOpts(client *ethclient.Client, ctx context.Context) (*b
 	}
 
 	opts.Nonce = new(big.Int).SetUint64(nonce)
-	opts.Value = s.Amount
+	opts.Value = s.AmountIn
 	opts.GasPrice = gasPrice
 	opts.GasLimit = 0
 	opts.Context = ctx
@@ -76,7 +76,7 @@ func ExactEthForTokens(router DexRouter, swap *DexSwap, opts *bind.TransactOpts)
 	return router.SwapExactETHForTokensSupportingFeeOnTransferTokens(
 		opts,
 		big.NewInt(0), // amountOutMin
-		[]common.Address{swap.TokenIn, swap.TokenOut},
+		[]common.Address{swap.TokenIn.Address, swap.TokenOut.Address},
 		swap.FromWallet.Address(),
 		swap.GetTxDeadlineFromNow(),
 	)
@@ -85,9 +85,9 @@ func ExactEthForTokens(router DexRouter, swap *DexSwap, opts *bind.TransactOpts)
 func ExactTokensForEth(router DexRouter, swap *DexSwap, opts *bind.TransactOpts) (*types.Transaction, error) {
 	return router.SwapExactTokensForETHSupportingFeeOnTransferTokens(
 		opts,
-		swap.Amount,   // amountIn
+		swap.AmountIn, // amountIn
 		big.NewInt(0), // amountOutMin
-		[]common.Address{swap.TokenIn, swap.TokenOut},
+		[]common.Address{swap.TokenIn.Address, swap.TokenOut.Address},
 		swap.FromWallet.Address(),
 		swap.GetTxDeadlineFromNow(),
 	)

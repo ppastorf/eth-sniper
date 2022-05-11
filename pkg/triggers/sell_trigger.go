@@ -3,7 +3,7 @@ package triggers
 import (
 	"context"
 	"log"
-	eth "sniper/pkg/eth"
+	"math/big"
 	"sniper/pkg/swap"
 	"time"
 
@@ -15,7 +15,7 @@ type SellTrigger struct {
 	Deadline *time.Time
 }
 
-func (st *SellTrigger) Set(client *ethclient.Client, geth *gethclient.Client, DEX *swap.Dex, targetToken *eth.Token) <-chan struct{} {
+func (st *SellTrigger) Set(client *ethclient.Client, geth *gethclient.Client, DEX *swap.Dex, tokenPrices <-chan *big.Float) <-chan struct{} {
 	trigger := make(chan struct{})
 	fire := func() { trigger <- struct{}{} }
 
@@ -31,7 +31,7 @@ func (st *SellTrigger) Set(client *ethclient.Client, geth *gethclient.Client, DE
 		for {
 			select {
 			case <-deadline.Done():
-				log.Printf("Sell deadline reached")
+				log.Printf("Sell deadline reached\n")
 				fire()
 				return
 			default:

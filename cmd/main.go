@@ -19,11 +19,11 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 )
 
-func buyTokens(client *ethclient.Client, sw *swap.DexSwap, DEX *swap.Dex, targetToken *eth.Token) (*types.Receipt, error) {
+func buyTokens(client *ethclient.Client, sw *swap.DexSwap, dex *swap.Dex, pricer *swap.PriceWatcher) (*types.Receipt, error) {
 	var err error
 	ctx := context.Background()
 
-	tx, err := sw.BuildTx(client, ctx, DEX.Router)
+	tx, err := sw.BuildTx(client, ctx, dex.Router)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to build swap transaction: %s", err)
 	}
@@ -53,7 +53,7 @@ func buyTokens(client *ethclient.Client, sw *swap.DexSwap, DEX *swap.Dex, target
 			Spent: %f %s
 			Fees: %f %s
 			Total cost: %f %s`,
-		tokensBought, targetToken.Symbol, buyPrice, "BNB",
+		tokensBought, sw.TokenOut.Symbol, buyPrice, "BNB",
 		eth.FromWei(tx.Value(), params.Ether), "BNB",
 		eth.FromWei(totalFee, params.Ether), "BNB",
 		eth.FromWei(tx.Cost(), params.Ether), "BNB",
@@ -106,40 +106,37 @@ func main() {
 		log.Fatalf("Failed to setup target Token: %s\n", err)
 	}
 
-	DEX, err := swap.SetupDex(client, conf.FactoryAddress, conf.RouterAddress)
+	dex, err := swap.SetupDex(client, conf.FactoryAddress, conf.RouterAddress)
 	if err != nil {
-		log.Fatalf("Failed to setup DEX client: %s\n", err)
+		log.Fatalf("Failed to setup dex client: %s\n", err)
+	}
+
+	pricer, err := swap.NewPriceWatcher(client, dex, ctx, targetToken, inToken, true)
+	if err != nil {
+		log.Fatalf("Failed to setup target token price watchers: %s\n", err)
 	}
 
 	buySwap := &swap.DexSwap{
 		FromWallet:  wallet,
 		SwapFunc:    swap.ExactEthForTokens,
-		TokenOut:    targetToken.Address,
-		TokenIn:     inToken.Address,
-		Amount:      conf.InTokenBuyAmount,
+		TokenOut:    targetToken,
+		TokenIn:     inToken,
+		AmountIn:    conf.InTokenBuyAmount,
 		GasStrategy: "fast",
 		Expiration:  big.NewInt(60 * 60),
 	}
 
-	<-conf.BuyTrigger.Set(client, geth, DEX, targetToken)
-	_, err = buyTokens(client, buySwap, DEX, targetToken)
+	<-conf.BuyTrigger.Set(client, geth, dex, targetToken)
+	_, err = buyTokens(client, buySwap, dex, pricer)
 	if err != nil {
 		log.Fatalf("Failed to buy tokens: %s\n", err)
 	}
 
-	// sell
 	// sellSwap := &swap.DexSwap{
-	// 	FromWallet: wallet,
-	// 	SwapFunc:   swap.ExactEthForTokens,
-	// 	TokenIn:    conf.TargetTokenAddr,
-	// 	TokenOut:   conf.InTokenAddr,
-	// 	// Amount:      ,
-	// 	GasStrategy: "fast",
-	// 	Expiration:  big.NewInt(60 * 60),
 	// }
 
-	// <-conf.SellTrigger.Set(client, geth, DEX, targetToken)
-	// _, err = buyTokens(client, sellSwap, DEX, targetToken)
+	// <-conf.SellTrigger.Set(client, geth, dex, inToken, tokenPrices)
+	// _, err = buyTokens(client, sellSwap, dex, targetToken)
 	// if err != nil {
 	// 	log.Fatalf("Failed to sell tokens: %s\n", err)
 	// }

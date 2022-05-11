@@ -1,16 +1,12 @@
 package swap
 
 import (
-	"context"
-	"errors"
 	"fmt"
-	"log"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
 
 	pancake "sniper/contracts/bsc/pancakeswap"
 	eth "sniper/pkg/eth"
@@ -70,87 +66,4 @@ func SetupDex(client bind.ContractBackend, factoryAddress, routerAddress common.
 		RouterContract:  routerContract,
 	}
 	return d, nil
-}
-
-func (dex *Dex) SubscribeTokenPrice(client *ethclient.Client, ctx context.Context, tokenB *eth.Token, tokenA *eth.Token) (<-chan *big.Float, error) {
-	prices := make(chan *big.Float)
-	var err error
-	opts := &bind.CallOpts{
-		Pending:     false,
-		BlockNumber: nil,
-		Context:     ctx,
-	}
-
-	pairAddr, err := dex.Factory.GetPair(opts, tokenA.Address, tokenB.Address)
-	if err != nil {
-		return nil, err
-	}
-
-	pair, err := pancake.NewPancakePair(pairAddr, client)
-	if err != nil {
-		return nil, err
-	}
-
-	sameOrder, err := isAtSameOrderAsPair(ctx, pair, tokenA, tokenB)
-	if err != nil {
-		return nil, fmt.Errorf("Cannot determine token order of pair: %s", err)
-	}
-
-	go func() {
-		opts := &bind.CallOpts{
-			Pending:     true,
-			BlockNumber: nil,
-			Context:     ctx,
-		}
-		defer close(prices)
-		for {
-			select {
-			case <-ctx.Done():
-				return
-			default:
-				reserves, err := pair.GetReserves(opts)
-				if err != nil {
-					log.Printf("Error calling pancakePair.GetReserves: %s\n", err)
-					return
-				}
-
-				var price *big.Float
-				if sameOrder {
-					price, err = eth.TokenRatio(reserves.Reserve0, reserves.Reserve1)
-				} else {
-					price, err = eth.TokenRatio(reserves.Reserve1, reserves.Reserve0)
-				}
-				if err != nil {
-					log.Printf("Failed to determine token price: %s\n", err)
-					continue
-				}
-				prices <- price
-			}
-		}
-	}()
-	return prices, nil
-}
-
-func isAtSameOrderAsPair(ctx context.Context, pair DexPair, tokenA, tokenB *eth.Token) (is bool, err error) {
-	opts := &bind.CallOpts{
-		Pending:     false,
-		BlockNumber: nil,
-		Context:     ctx,
-	}
-	token0Addr, err := pair.Token0(opts)
-	if err != nil {
-		return false, err
-	}
-	token1Addr, err := pair.Token1(opts)
-	if err != nil {
-		return false, err
-	}
-
-	if tokenA.Address == token0Addr && tokenB.Address == token1Addr {
-		return true, nil
-	}
-	if tokenA.Address == token1Addr && tokenB.Address == token0Addr {
-		return false, nil
-	}
-	return false, errors.New("Tokens passed are not the same as of pair")
 }
